@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SixSortingHat - 6모자 토론 시스템</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+
+        /* 6모자별 색상 시스템 */
+        .hat-white { --hat-color: #FFFFFF; --hat-bg: #F8FAFC; --hat-border: #E2E8F0; --hat-text: #1A202C; }
+        .hat-red { --hat-color: #EF4444; --hat-bg: #FEF2F2; --hat-border: #FECACA; --hat-text: #991B1B; }
+        .hat-black { --hat-color: #374151; --hat-bg: #F9FAFB; --hat-border: #D1D5DB; --hat-text: #111827; }
+        .hat-yellow { --hat-color: #F59E0B; --hat-bg: #FFFBEB; --hat-border: #FDE68A; --hat-text: #92400E; }
+        .hat-green { --hat-color: #10B981; --hat-bg: #ECFDF5; --hat-border: #A7F3D0; --hat-text: #065F46; }
+        .hat-blue { --hat-color: #3B82F6; --hat-bg: #EFF6FF; --hat-border: #BFDBFE; --hat-text: #1E40AF; }
+
+        .hat-bubble {
+            background-color: var(--hat-bg);
+            border: 2px solid var(--hat-border);
+            color: var(--hat-text);
+            border-radius: 20px;
+            max-width: 85%;
+            position: relative;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .hat-bubble:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .hat-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 3px solid var(--hat-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--hat-bg);
+            font-weight: 600;
+            font-size: 18px;
+            color: var(--hat-color);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            space-x: 1;
+        }
+
+        .typing-dot {
+            height: 8px;
+            width: 8px;
+            border-radius: 50%;
+            background-color: var(--hat-color);
+            animation: typing 1.4s infinite ease-in-out;
+        }
+
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+
+        .coin-indicator {
+            background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            box-shadow: 0 4px 6px -1px rgba(245, 158, 11, 0.3);
+        }
+
+        .question-input {
+            background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+            border: 2px solid #BFDBFE;
+            border-radius: 16px;
+            padding: 16px 20px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .question-input:focus {
+            outline: none;
+            border-color: #3B82F6;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        }
+
+        .send-button {
+            background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
+            border-radius: 16px;
+            padding: 16px 24px;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3);
+        }
+
+        .send-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px -3px rgba(59, 130, 246, 0.3);
+        }
+
+        .send-button:disabled {
+            opacity: 0.5;
+            transform: none;
+            cursor: not-allowed;
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: linear-gradient(90deg,
+                #FFFFFF 0%, #EF4444 16.66%, #374151 33.33%,
+                #F59E0B 50%, #10B981 66.66%, #3B82F6 83.33%, #3B82F6 100%);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3);
+            transition: width 0.5s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="max-w-md mx-auto bg-white h-screen flex flex-col">
+        <!-- Header -->
+        <div class="bg-yellow-300 py-4 px-4 flex items-center justify-between header-shadow">
+            <div class="flex items-center">
+                <div class="flex items-center">
+                    <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center mr-3">
+                        <span class="text-xl">🎩</span>
+                    </div>
+                    <h1 class="ml-2 font-semibold text-gray-800">6모자 토론</h1>
+                </div>
+            </div>
+            <div class="flex space-x-4">
+                <i data-feather="users" class="w-5 h-5 text-gray-700"></i>
+                <i data-feather="brain" class="w-5 h-5 text-gray-700"></i>
+                <i data-feather="more-vertical" class="w-5 h-5 text-gray-700"></i>
+            </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="bg-gray-50 px-4 py-2 border-b">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar" style="width: 0%"></div>
+            </div>
+            <p class="text-gray-600 text-xs mt-1" id="progressText">질문을 시작해보세요</p>
+        </div>
+
+        <!-- Chat Messages -->
+        <div class="flex-1 overflow-y-auto p-4 bg-gray-50" id="chatMessages">
+            <!-- Date Divider -->
+            <div class="flex justify-center my-4">
+                <span class="bg-gray-200 text-xs px-2 py-1 rounded-full">Today</span>
+            </div>
+
+            <!-- Welcome Message -->
+            <div class="flex mb-4">
+                <div class="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center mr-2">
+                    <span class="text-white text-sm">🎩</span>
+                </div>
+                <div>
+                    <div class="text-xs text-gray-500 mb-1">6모자 시스템, 방금</div>
+                    <div class="bg-white p-3 rounded-r-lg rounded-bl-lg shadow-sm max-w-xs">
+                        안녕하세요! 6가지 관점에서 여러분의 질문을 분석해드리는 AI 토론 시스템입니다. 궁금한 것을 물어보세요!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Message Input -->
+        <div class="p-3 bg-white border-t border-gray-200 flex items-center">
+            <i data-feather="plus-circle" class="w-6 h-6 text-gray-500 mr-2"></i>
+            <input
+                type="text"
+                id="questionInput"
+                placeholder="질문을 입력하세요..."
+                class="flex-1 border border-gray-300 rounded-full py-2 px-4 focus:outline-none focus:border-yellow-400"
+                maxlength="500"
+                onkeypress="handleKeyPress(event)"
+            >
+            <button
+                id="sendButton"
+                onclick="sendQuestion()"
+                class="ml-2 bg-yellow-400 rounded-full p-2 disabled:bg-gray-300"
+                disabled
+            >
+                <i data-feather="send" class="w-5 h-5 text-white"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // 전역 변수
+        let sessionId = null;
+        let currentHat = 0;
+        let isDiscussing = false;
+        let isSessionReady = false;
+        const hats = [
+            { name: '하얀 모자', emoji: '⚪', class: 'hat-white', role: '객관적 정보 분석' },
+            { name: '빨간 모자', emoji: '🔴', class: 'hat-red', role: '감정과 직감' },
+            { name: '검은 모자', emoji: '⚫', class: 'hat-black', role: '비판적 분석' },
+            { name: '노란 모자', emoji: '🟡', class: 'hat-yellow', role: '긍정적 측면' },
+            { name: '초록 모자', emoji: '🟢', class: 'hat-green', role: '창의적 아이디어' },
+            { name: '파란 모자', emoji: '🔵', class: 'hat-blue', role: '토론 관리' }
+        ];
+
+        // 페이지 로드 시 초기화
+        window.onload = function() {
+            feather.replace();
+            createSession();
+            setupInputHandlers();
+        };
+
+        // 입력 핸들러 설정
+        function setupInputHandlers() {
+            const input = document.getElementById('questionInput');
+            const button = document.getElementById('sendButton');
+            const charCount = document.getElementById('charCount');
+
+            input.addEventListener('input', function() {
+                const length = this.value.length;
+                charCount.textContent = `${length}/500`;
+                updateSendButton();
+
+                if (length > 450) {
+                    charCount.classList.add('text-red-500');
+                } else {
+                    charCount.classList.remove('text-red-500');
+                }
+            });
+        }
+
+        // 엔터키 처리
+        function handleKeyPress(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                sendQuestion();
+            }
+        }
+
+        // 전송 버튼 상태 업데이트
+        function updateSendButton() {
+            const input = document.getElementById('questionInput');
+            const button = document.getElementById('sendButton');
+            const hasText = input.value.trim().length > 0;
+
+            button.disabled = !hasText || !isSessionReady || isDiscussing;
+
+            // 버튼 텍스트 업데이트
+            if (!isSessionReady) {
+                button.textContent = '연결 중...';
+            } else if (isDiscussing) {
+                button.textContent = '분석 중...';
+            } else {
+                button.textContent = '질문하기';
+            }
+        }
+
+        // 세션 생성 (코인 시스템 제거)
+        async function createSession() {
+            try {
+                // 클라이언트에서 세션 ID 생성 (서버 의존성 제거)
+                sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                isSessionReady = true;
+                updateSendButton();
+                console.log('세션 준비 완료:', sessionId);
+                addSystemMessage('✅ 토론 준비가 완료되었습니다. 궁금한 것을 물어보세요!');
+            } catch (error) {
+                console.error('세션 준비 오류:', error);
+                isSessionReady = false;
+                updateSendButton();
+                addSystemMessage('⚠️ 연결에 문제가 있습니다. 페이지를 새로고침해주세요.');
+            }
+        }
+
+        // 질문 전송
+        async function sendQuestion() {
+            const input = document.getElementById('questionInput');
+            const question = input.value.trim();
+
+            if (!question || isDiscussing || !sessionId || !isSessionReady) return;
+
+            // UI 업데이트
+            addUserMessage(question);
+            input.value = '';
+            document.getElementById('charCount').textContent = '0/500';
+            isDiscussing = true;
+            updateSendButton();
+
+            // 6모자 분석 시작
+            startDiscussion(question);
+        }
+
+        // 6모자 분석 시작
+        async function startDiscussion(question) {
+            currentHat = 0;
+            updateProgress(0, '6모자가 준비 중입니다...');
+
+            try {
+                // GET 방식으로 스트리밍 시작 (한글 인코딩 적용)
+                const encodedQuestion = encodeURIComponent(question);
+                const encodedSessionId = encodeURIComponent(sessionId);
+                const response = await fetch(`/api/v1/discussions/stream?question=${encodedQuestion}&session_id=${encodedSessionId}`);
+
+                if (!response.ok) {
+                    throw new Error('스트리밍 시작 실패');
+                }
+
+                // SSE 스트림 처리
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+
+                    const chunk = decoder.decode(value);
+                    const lines = chunk.split('\n');
+
+                    for (const line of lines) {
+                        if (line.startsWith('data: ')) {
+                            try {
+                                const data = JSON.parse(line.substring(6));
+                                handleDiscussionEvent(data);
+                            } catch (error) {
+                                console.error('이벤트 파싱 오류:', error);
+                            }
+                        }
+                    }
+                }
+
+                // 분석 완료
+                finishDiscussion();
+
+            } catch (error) {
+                console.error('분석 시작 오류:', error);
+                addSystemMessage('❌ 분석을 시작할 수 없습니다.');
+                finishDiscussion();
+            }
+        }
+
+        // 6모자 분석 이벤트 처리
+        function handleDiscussionEvent(data) {
+            switch (data.type) {
+                case 'discussion_started':
+                    updateProgress(10, '6모자 분석이 시작되었습니다');
+                    break;
+
+                case 'intent_classified':
+                    updateProgress(20, '질문을 분석 중입니다');
+                    break;
+
+                case 'hat_completed':
+                    handleHatResponse(data);
+                    break;
+
+                case 'quality_checked':
+                    updateProgress(90, '결과를 검증 중입니다');
+                    break;
+
+                case 'final_response':
+                    handleFinalResponse(data);
+                    break;
+
+                case 'discussion_completed':
+                    finishDiscussion();
+                    break;
+
+                case 'error':
+                    // 세션 만료 시 자동 재생성
+                    if (data.error.includes('유효하지 않은 세션')) {
+                        addSystemMessage('🔄 세션이 만료되었습니다. 새 세션을 생성 중...');
+                        isSessionReady = false;
+                        sessionId = null;
+                        updateSendButton();
+                        createSession(); // 자동으로 새 세션 생성
+                    } else {
+                        addSystemMessage(`❌ 오류: ${data.error}`);
+                    }
+                    finishDiscussion();
+                    break;
+            }
+        }
+
+        // 모자 응답 처리
+        function handleHatResponse(data) {
+            const hat = data.hat;
+            const progress = 20 + (currentHat * 12);
+
+            updateProgress(progress, `${hat.name}이 생각 중입니다...`);
+
+            // 타이핑 인디케이터 표시
+            addTypingIndicator(hat);
+
+            setTimeout(() => {
+                removeTypingIndicator();
+                addHatMessage(hat, data.content);
+                currentHat++;
+            }, 1000 + Math.random() * 2000); // 1-3초 랜덤 딜레이
+        }
+
+        // 최종 응답 처리
+        function handleFinalResponse(data) {
+            updateProgress(100, '6모자 분석이 완료되었습니다!');
+
+            setTimeout(() => {
+                if (data.content) {
+                    addFinalSummary(data.content, data.quality_info);
+                }
+                finishDiscussion();
+            }, 1000);
+        }
+
+        // 분석 완료
+        function finishDiscussion() {
+            isDiscussing = false;
+            currentHat = 0;
+            updateSendButton();
+            updateProgress(0, '다음 질문을 입력해주세요');
+
+            // 코인 시스템 제거됨
+        }
+
+        // 메시지 추가 함수들
+        function addUserMessage(message) {
+            const container = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'flex justify-end mb-4';
+            messageDiv.innerHTML = `
+                <div>
+                    <div class="text-xs text-gray-500 mb-1 text-right">나, ${getCurrentTime()}</div>
+                    <div class="bg-yellow-400 text-black p-3 rounded-l-lg rounded-tr-lg max-w-xs shadow-sm">
+                        ${escapeHtml(message)}
+                    </div>
+                </div>
+            `;
+            container.appendChild(messageDiv);
+            scrollToBottom();
+        }
+
+        function addHatMessage(hat, content) {
+            const container = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'flex mb-4';
+
+            // 6모자별 색상 매핑
+            const hatColors = {
+                '하얀 모자': '#9CA3AF',
+                '빨간 모자': '#EF4444',
+                '검은 모자': '#374151',
+                '노란 모자': '#F59E0B',
+                '초록 모자': '#10B981',
+                '파란 모자': '#3B82F6'
+            };
+
+            const avatarColor = hatColors[hat.name] || '#9CA3AF';
+
+            messageDiv.innerHTML = `
+                <div class="w-8 h-8 rounded-full mr-2 flex items-center justify-center" style="background-color: ${avatarColor}">
+                    <span class="text-white text-sm">${hat.emoji}</span>
+                </div>
+                <div>
+                    <div class="text-xs text-gray-500 mb-1">${hat.name}, ${getCurrentTime()}</div>
+                    <div class="bg-white p-3 rounded-r-lg rounded-bl-lg shadow-sm max-w-xs">
+                        ${escapeHtml(content).replace(/\n/g, '<br>')}
+                    </div>
+                </div>
+            `;
+            container.appendChild(messageDiv);
+            scrollToBottom();
+        }
+
+        function addTypingIndicator(hat) {
+            const container = document.getElementById('chatMessages');
+            const typingDiv = document.createElement('div');
+            typingDiv.id = 'typingIndicator';
+            typingDiv.className = 'flex mb-4';
+
+            // 6모자별 색상 매핑
+            const hatColors = {
+                '하얀 모자': '#9CA3AF',
+                '빨간 모자': '#EF4444',
+                '검은 모자': '#374151',
+                '노란 모자': '#F59E0B',
+                '초록 모자': '#10B981',
+                '파란 모자': '#3B82F6'
+            };
+
+            const avatarColor = hatColors[hat.name] || '#9CA3AF';
+
+            typingDiv.innerHTML = `
+                <div class="w-8 h-8 rounded-full mr-2 flex items-center justify-center" style="background-color: ${avatarColor}">
+                    <span class="text-white text-sm">${hat.emoji}</span>
+                </div>
+                <div>
+                    <div class="text-xs text-gray-500 mb-1">${hat.name} 생각 중...</div>
+                    <div class="bg-gray-100 p-3 rounded-r-lg rounded-bl-lg max-w-xs">
+                        <div class="flex space-x-1">
+                            <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                            <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+                            <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.appendChild(typingDiv);
+            scrollToBottom();
+        }
+
+        function removeTypingIndicator() {
+            const indicator = document.getElementById('typingIndicator');
+            if (indicator) {
+                indicator.remove();
+            }
+        }
+
+        function addSystemMessage(message) {
+            const container = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'flex justify-center mb-4';
+            messageDiv.innerHTML = `
+                <span class="bg-gray-200 text-xs px-2 py-1 rounded-full">
+                    ${escapeHtml(message)}
+                </span>
+            `;
+            container.appendChild(messageDiv);
+            scrollToBottom();
+        }
+
+        function addFinalSummary(content, qualityInfo) {
+            const container = document.getElementById('chatMessages');
+            const summaryDiv = document.createElement('div');
+            summaryDiv.className = 'mb-4';
+            summaryDiv.innerHTML = `
+                <div class="bg-gradient-to-br from-indigo-50 to-blue-50 border-2 border-indigo-200 rounded-2xl p-6 shadow-lg">
+                    <div class="flex items-center mb-3">
+                        <span class="text-2xl mr-2">📋</span>
+                        <span class="font-bold text-indigo-800">6모자 종합 분석</span>
+                    </div>
+                    <div class="text-gray-700 leading-relaxed mb-4">${escapeHtml(content)}</div>
+                    ${qualityInfo ? `
+                        <div class="text-xs text-indigo-600 bg-indigo-100 rounded-lg p-2">
+                            <strong>품질 점수:</strong> ${qualityInfo.score || 'N/A'}/100
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+            container.appendChild(summaryDiv);
+            scrollToBottom();
+        }
+
+        // UI 업데이트 함수들
+        function updateProgress(percentage, text) {
+            document.getElementById('progressBar').style.width = `${percentage}%`;
+            document.getElementById('progressText').textContent = text;
+        }
+
+        // updateCoinCount 함수 제거됨 (코인 시스템 제거)
+
+        // 유틸리티 함수들
+        function getCurrentTime() {
+            return new Date().toLocaleTimeString('ko-KR', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function scrollToBottom() {
+            const container = document.getElementById('chatMessages');
+            setTimeout(() => {
+                container.scrollTop = container.scrollHeight;
+            }, 100);
+        }
+
+        // 새로고침 버튼 (개발용)
+        function refreshSession() {
+            if (confirm('새 세션을 시작하시겠습니까?')) {
+                location.reload();
+            }
+        }
+    </script>
+</body>
+</html>

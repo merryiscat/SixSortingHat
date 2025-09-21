@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friends Group Chat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <style>
+        .message-bubble {
+            max-width: 70%;
+        }
+        .my-message {
+            background-color: #FEE500;
+            border-radius: 18px 0 18px 18px;
+        }
+        .their-message {
+            background-color: #FFFFFF;
+            border-radius: 0 18px 18px 18px;
+            box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- Chat Screen -->
+    <div class="max-w-md mx-auto bg-white h-screen flex flex-col">
+        <!-- Header -->
+        <div class="bg-yellow-300 py-4 px-4 flex items-center justify-between header-shadow">
+            <div class="flex items-center">
+                <a href="index.html" class="mr-2">
+                    <i data-feather="arrow-left" class="w-5 h-5"></i>
+                </a>
+                <div class="flex items-center">
+                    <img src="http://static.photos/people/200x200/1" class="w-8 h-8 rounded-full object-cover">
+                    <h1 class="ml-2 font-semibold">Friends Group</h1>
+                </div>
+            </div>
+            <div class="flex space-x-4">
+                <i data-feather="phone" class="w-5 h-5"></i>
+                <i data-feather="video" class="w-5 h-5"></i>
+                <i data-feather="more-vertical" class="w-5 h-5"></i>
+            </div>
+        </div>
+
+        <!-- Chat Messages -->
+        <div class="flex-1 overflow-y-auto p-4 bg-gray-50" id="chat-messages">
+            <!-- Date Divider -->
+            <div class="flex justify-center my-4">
+                <span class="bg-gray-200 text-xs px-2 py-1 rounded-full">Today</span>
+            </div>
+
+            <!-- Their Message -->
+            <div class="flex mb-4">
+                <img src="http://static.photos/people/200x200/7" class="w-8 h-8 rounded-full object-cover mr-2">
+                <div>
+                    <div class="text-xs text-gray-500 mb-1">Jane, 12:05 PM</div>
+                    <div class="message-bubble their-message p-3">
+                        Hey everyone! Let's meet this weekend for coffee.
+                    </div>
+                </div>
+            </div>
+
+            <!-- My Message -->
+            <div class="flex justify-end mb-4">
+                <div>
+                    <div class="text-xs text-gray-500 mb-1 text-right">Me, 12:10 PM</div>
+                    <div class="message-bubble my-message p-3">
+                        Sounds great! I'm free on Saturday.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Their Message -->
+            <div class="flex mb-4">
+                <img src="http://static.photos/people/200x200/8" class="w-8 h-8 rounded-full object-cover mr-2">
+                <div>
+                    <div class="text-xs text-gray-500 mb-1">Mike, 12:15 PM</div>
+                    <div class="message-bubble their-message p-3">
+                        I can join too. How about 2pm at the usual place?
+                    </div>
+                </div>
+            </div>
+
+            <!-- My Message -->
+            <div class="flex justify-end mb-4">
+                <div>
+                    <div class="text-xs text-gray-500 mb-1 text-right">Me, 12:18 PM</div>
+                    <div class="message-bubble my-message p-3">
+                        Perfect! See you all then.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Message Input -->
+        <div class="p-3 bg-white border-t border-gray-200 flex items-center">
+            <i data-feather="plus-circle" class="w-6 h-6 text-gray-500 mr-2"></i>
+            <input type="text" placeholder="Type a message" class="flex-1 border border-gray-300 rounded-full py-2 px-4 focus:outline-none focus:border-yellow-400">
+            <button class="ml-2 bg-yellow-400 rounded-full p-2">
+                <i data-feather="send" class="w-5 h-5 text-white"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        feather.replace();
+        
+        // Auto scroll to bottom of chat
+        window.onload = function() {
+            const chatMessages = document.getElementById('chat-messages');
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        };
+    </script>
+</body>
+</html>

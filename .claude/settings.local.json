@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python:*)",
+      "Bash(.venv\\Scripts\\activate)",
+      "Bash(uv:*)",
+      "Bash(timeout 10s uv run:*)",
+      "Bash(docker-compose up:*)",
+      "Bash(find:*)",
+      "Bash(timeout:*)",
+      "mcp__context7__resolve-library-id",
+      "mcp__context7__get-library-docs",
+      "Bash(printenv)",
+      "Bash(powershell:*)",
+      "Bash(curl:*)",
+      "Read(//c/Users/minhy/project/**)",
+      "WebFetch(domain:localhost)",
+      "mcp__playwright-mcp__playwright_get_visible_html",
+      "mcp__playwright-mcp__playwright_screenshot",
+      "mcp__playwright-mcp__playwright_click",
+      "mcp__playwright-mcp__playwright_evaluate",
+      "mcp__playwright-mcp__playwright_get_visible_text",
+      "mcp__playwright-mcp__playwright_navigate",
+      "mcp__playwright-mcp__playwright_fill",
+      "mcp__playwright-mcp__playwright_press_key"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
