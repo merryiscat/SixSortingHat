@@ -15,7 +15,7 @@ aioredis==2.0.1
 
 # AI and LLM
 langchain==0.1.0
-langraph==0.0.20
+langgraph==0.0.20
 openai==1.6.1
 
 # Utilities
