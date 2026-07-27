@@ -4,140 +4,129 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 이 문서의 성격
 
-**이 프로젝트는 1차 구현이 중단된 후 재시작(rebuild) 단계입니다.**
-저장소에 남아있는 코드는 "동작하는 제품"이 아니라 **참고용 유산(legacy)** 입니다.
-이 문서는 새 구현에 **승계할 자산**과 **반복하면 안 되는 함정**만 정리합니다.
+**이 프로젝트는 1차 구현을 폐기하고 재시작한 상태입니다.** (정리 완료: 2026-07-27)
 
-기존 CLAUDE.md(문서 기반 개발 워크플로우 안내)는 git 히스토리(`git show 8ae8c59:CLAUDE.md`)에 보존되어 있습니다.
+`backend/`, `frontend/` 등 1차 구현 코드는 **로컬에서 삭제**되었고, 저장소에는
+설계 문서와 참조 자료만 남아 있습니다. 삭제된 코드는 git 히스토리(`8ae8c59` 및 이전)에
+보존되어 있으므로 필요하면 `git show 8ae8c59:<경로>` 로 열람할 수 있습니다.
 
----
-
-## 0. 시크릿 위생 (처리 완료, 2026-07-27)
-
-재시작에 앞서 아래는 모두 정리되었습니다. 새 구현에서도 이 상태를 유지하십시오.
-
-- **노출됐던 OpenAI 키(`sk-TeCbZs...`)는 폐기됨.** git 히스토리에 문자열이 남아 있지만 무효하므로 추가 조치 불필요.
-- `.env`, `backend/.env`, `backend/sixsortinghat_dev.db` **git 추적 해제** (`git rm --cached`). 파일은 작업 트리에 그대로 있습니다.
-- 루트 `.gitignore`를 **UTF-8로 재작성**. 기존 파일은 UTF-16 LE라 git이 규칙을 전혀 읽지 못했습니다 — **에디터에서 `.gitignore`를 저장할 때 인코딩이 UTF-16으로 되돌아가지 않는지 주의하십시오.**
-- `backend/.env.example` 추가. 새 키는 여기가 아니라 `backend/.env`(추적 제외)에 넣습니다.
+**구현 코드는 현재 존재하지 않습니다.** 빌드·테스트·실행 명령도 아직 없습니다.
+아래 4장(결함 패턴)은 "삭제된 코드에서 배운 것"이며, 현재 코드에 대한 설명이 아닙니다.
 
 ---
 
 ## 1. 프로젝트 개요
 
 SixSortingHat은 에드워드 드 보노의 6색깔 모자 사고법을 LLM 멀티 에이전트로 구현한 토론형 챗봇입니다.
-6개 에이전트(하양=사실 / 빨강=감정 / 검정=위험 / 노랑=긍정 / 초록=창의 / 파랑=진행관리)가 순차적으로 사고를 확장하고, 파란 모자가 종합·품질 검증합니다.
+6개 에이전트(하양=사실 / 빨강=감정 / 검정=위험 / 노랑=긍정 / 초록=창의 / 파랑=진행관리)가
+순차적으로 사고를 확장하고, 파란 모자가 종합·품질 검증한 뒤 합격 시 사용자에게 전달합니다.
+불합격이면 쿼리를 확장해 재토론합니다.
 
-원본 기획 백서: **[docs/0_architecture.md](docs/0_architecture.md)** — 이 프로젝트에서 가장 신뢰도 높은 문서이며, 재시작의 출발점입니다.
-
----
-
-## 2. 승계 자산 (가치 순)
-
-### A. 설계 문서 `docs/` — 신뢰도 등급 주의
-
-| 문서 | 상태 | 승계 판단 |
-|---|---|---|
-| `0_architecture.md` | 원본 기획 백서, 내용 충실 | **그대로 승계**. 요구사항의 단일 진실원 |
-| `1_goal_scope_definition.md` ~ `5_data_model_schema.md` | 상세 설계, 작성 완료 | 승계하되 **구현과 대조 필요** (아래 3장 갭 참고) |
-| `6_master_execution_plan.md` | TASK-001~024 정의. **진행률 기록(70% 완료)은 부정확** | TASK 목록 구조만 승계, 상태값은 전부 리셋 |
-| `7_unit_Integration_Test.md` (49줄), `8_bug_report.md` | **빈 템플릿 껍데기** (제목만 있고 내용 없음) | 승계 가치 없음. 새로 작성 |
-
-### B. 프롬프트 자산 `backend/app/prompts/` — **재사용 가치 최상**
-- `six_hats/{white,red,black,yellow,green,blue}_hat.py`: 모자별 시스템 프롬프트
-- `intent/classification.py`: 단순/복합 질문 의도 분류
-- `quality/verification.py`: 토론 품질 검증
-- `__init__.py`의 `PromptManager`: 색상 키 → 프롬프트 매핑 + 이전 모자 답변을 컨텍스트로 포맷팅
-- 프레임워크와 무관하게 **가장 먼저 이식할 부분**
-
-### C. LangGraph 골격 `backend/app/agents/` — 구조 패턴만 승계
-`reference/langgraph/{State,Node,Graph}.py` 패턴을 따른 3분할 구조:
-- `six_hat_state.py`: `SixHatState` TypedDict (모자별 응답 + 진행 상태 + 품질 + `messages`)
-- `six_hat_nodes.py`: 노드 함수 11개
-- `six_hat_graph.py`: `StateGraph` 조립 + 조건부 라우팅
-
-흐름: `user_input → intent_classify →(simple) simple_response` / `→(complex) white → red → black → yellow → green → blue → quality_check →(pass) final_response / (fail) recirculation → white...` (최대 3회)
-
-### D. 프론트엔드 프로토타입 `frontend/*.html`
-- Tailwind CDN 기반 단일 HTML 3종 (`index.html` 채팅, `home.html` 목록, `chat.html` 1292줄 완성형)
-- **6모자 색상 시스템 CSS 변수**(`.hat-white` ~ `.hat-blue`)는 그대로 쓸 만함
-- `chat.html`은 `fetch()` + 수동 스트림 파싱으로 SSE를 소비 (EventSource 아님 — POST/헤더 제약 회피용)
-- `reference/ui/`에 원본 목업 존재
-
-### E. 인프라
-- `docker-compose.yml`: PostgreSQL 15 + Redis 7 (healthcheck 포함). 바로 재사용 가능
-- `backend/alembic/`: 마이그레이션 뼈대 (`sessions` 테이블 1개뿐)
+원본 기획 백서: **[docs/0_architecture.md](docs/0_architecture.md)** — 이 프로젝트에서 가장 신뢰도 높은 문서이며 요구사항의 단일 진실원입니다.
 
 ---
 
-## 3. 설계 대비 구현 갭 — **재시작 시 반드시 확인할 목록**
+## 2. 현재 저장소 구성
 
-`docs/6`은 "70% 완료"라고 기록하지만, 실제로는 **해피패스 데모 수준**입니다. 문서를 믿지 말고 아래를 기준으로 삼으십시오.
-
-### 설계에 있으나 미구현
-- **모자 순서를 매 라운드 변경** (`docs/0` 섹션 2.2 명시 요구) → 미구현. `six_hat_graph.py`의 `hat_sequence_route()`는 정의만 되고 그래프에 연결되지 않은 **죽은 코드**이며, 실제 흐름은 고정 엣지 체인입니다.
-- **재순환 시 쿼리 확장** → 미구현. `recirculation_node`는 `completed_hats`만 비우는데, 고정 엣지 구조라 아무 효과가 없습니다. 같은 질문으로 그대로 재실행됩니다.
-- **LangChain Tool / MCP 연동** (웹검색·크롤링) → 전무
-- **D3.js 논증 그래프 시각화**, **map-reduce + refine 하이브리드 요약** → 전무
-- **PostgreSQL checkpointer** → 실제로는 `MemorySaver` (프로세스 재시작 시 상태 소실)
-- **모바일 앱(RN/Flutter)** → 정적 HTML로 대체됨
-- **LangSmith 관찰성** → 미설정
-
-### 구현되었으나 깨져 있는 부분
-- `discussion_service.py::stream_discussion` — 중간의 `return` 이후로 **약 50줄이 도달 불가 죽은 코드**. `discussion_started`/`discussion_completed` 이벤트가 실제로는 발송되지 않습니다.
-- **세션·코인 검증이 통째로 주석 처리**되어 있습니다 (`start_discussion`, `stream_discussion`). MVP의 "세션당 5코인" 정책이 무력화된 상태.
-- `QualityChecker.check_quality` — LLM 출력을 `"점수:"`, `"결과:"` 한국어 접두사 **문자열 파싱**. 형식이 어긋나면 조용히 기본값으로 떨어지고, **예외 발생 시 무조건 `passed=True`**로 통과시킵니다. → 새 구현에서는 `with_structured_output` / Pydantic 스키마 사용 권장.
-- `simple_response_node` — LLM 호출이 아니라 `"안녕"`, `"누구"` 같은 **키워드 if문 하드코딩**.
-- 설정 이중화 — `config.py`(Postgres)와 `config_dev.py`(SQLite)가 공존하는데 **앱 전체가 `dev_settings`를 하드 임포트**합니다. `config.py`는 사실상 미사용.
-- Redis도 동일 — `database.py`가 `MemoryCache` 클래스로 대체 운영. 프로세스 로컬이라 다중 워커에서 깨집니다.
-- 노드가 `{**state, ...}`로 **전체 상태를 반환** — LangGraph의 부분 업데이트 관례와 다르고, `messages`(`add_messages` 리듀서)와 충돌 소지가 있습니다.
-- `simple_response_node` / `final_response_node`가 `SixHatState` 그래프 안에서 **다른 스키마(`EndState`)를 반환**합니다. 스키마 일관성 재설계 필요.
-- 리스트 상태(`all_responses`, `completed_hats`)를 **in-place `append` 후 반환** — 병렬 실행·체크포인트 복원 시 위험.
-
-### 기술 스택 재검토 필요
-- 의존성 핀이 2023~2024년에 멈춰 있습니다: `fastapi==0.104.1`, `pydantic-settings 2.4`, `langgraph>=0.1.0`.
-- `backend/requirements.txt`와 `pyproject.toml`의 버전이 **서로 다릅니다** (`langgraph==0.0.20` vs `>=0.1.0`). uv/`pyproject.toml` 기준으로 단일화하고 `requirements.txt`는 폐기 권장.
-- `aioredis==2.0.1`은 유지보수 중단됨 (`redis-py`의 `redis.asyncio`로 흡수). 실제 코드도 이미 `redis.asyncio`를 씁니다 — 의존성만 잔재.
-- LLM은 `gpt-4o-mini` 전제로 설계됨. 재시작 시 모델 선택 재검토 대상.
-
----
-
-## 4. 기존 코드 실행 방법 (검증용)
-
-키를 재발급해 `backend/.env`에 넣은 뒤:
-
-```bash
-cd backend
-uv run python -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+```
+docs/              설계 문서 0~8  ← 개발의 출발점
+reference/
+  langgraph/       1차 시도가 따랐던 State/Node/Graph 패턴 원본
+  ui/              UI 목업 원본
+docker-compose.yml PostgreSQL 15 + Redis 7 (healthcheck 포함, 재사용 가능)
+README.md          6모자 기법 개념 설명
 ```
 
-- 앱: http://localhost:8000/app/ · Swagger: `/docs` · 헬스: `/health`
-- 6모자 통합 스모크 테스트: `cd backend && uv run python test_six_hat_system.py`
-  (pytest가 아닌 **`asyncio.run` 스크립트**입니다. 실제 OpenAI를 호출하므로 유료·비결정적이며, 단위 테스트는 존재하지 않습니다.)
-- API 스모크: `cd backend && uv run python test_api.py`
-- 마이그레이션: `cd backend && uv run alembic upgrade head`
-- 인프라: `docker-compose up -d` (Postgres 5432, Redis 6379 — 현재 코드는 실제로 사용하지 않음)
+구현이 시작되면 `backend/`(그리고 클라이언트 디렉터리)를 새로 만듭니다.
 
 ---
 
-## 5. 개발 원칙 (승계)
+## 3. 설계 문서 — 신뢰도 등급
+
+| 문서 | 상태 | 취급 |
+|---|---|---|
+| `0_architecture.md` | 원본 기획 백서, 충실 | **요구사항의 기준**. 구현이 이 문서와 어긋나면 구현이 틀린 것 |
+| `1_goal_scope_definition.md` | 목표·범위·성공지표 작성 완료 | 그대로 사용 |
+| `2_detailed_functional_specification.md` | FEAT-001~013 명세 완료 | 그대로 사용 |
+| `3_ui_design_system.md` | 디자인 토큰·컴포넌트·반응형·접근성 완비 | **UI 색상은 이 문서가 스펙**. 삭제된 프론트 HTML의 하드코딩 값과 달랐음 |
+| `4_api_specification.md` | API 명세 작성 완료 | 구현 전 재검토 |
+| `5_data_model_schema.md` | 스키마 작성 완료 | 구현 전 재검토 |
+| `6_master_execution_plan.md` | TASK-001~024, **전부 미착수로 리셋됨** | 여기서 다음 TASK 선택 |
+| `7_unit_Integration_Test.md` | 7.1(테스트 피라미드·도구)만 작성됨, 7.2~7.6 비어 있음 | 전략은 유효, 상세는 작성 필요 |
+| `8_bug_report.md` | 분류 체계·템플릿만 있음, 등록된 버그 없음 | 새 구현의 버그부터 기록 |
+
+---
+
+## 4. 1차 시도에서 확인된 결함 패턴 (재발 방지)
+
+코드는 지웠지만 **실패에서 얻은 지식은 승계합니다.** 재구현 시 아래를 반복하지 마십시오.
+각 항목은 `docs/6`의 해당 TASK 완료 조건에도 반영되어 있습니다.
+
+### 설계 요구를 놓친 것
+- **모자 발언 순서 고정** — `docs/0` §2.2는 "순서는 매 시도마다 달라야 한다"고 규정하는데,
+  1차 구현은 고정 엣지 체인이었고 순서 결정 라우터는 정의만 된 채 그래프에 연결되지 않았습니다.
+- **재순환이 무의미** — 품질 미달 시 같은 질문을 그대로 재실행했습니다. 쿼리 확장이 없었습니다.
+- **Tool/MCP 연동, D3.js 논증 그래프, map-reduce+refine 요약** — 전부 미착수.
+- **DB checkpointer 대신 MemorySaver** — 프로세스 재시작 시 토론 상태가 소실됐습니다.
+
+### 구조적으로 잘못 잡은 것
+- **품질 검증을 문자열 파싱으로** — LLM 출력에서 `"점수:"`, `"결과:"` 접두사를 잘라 썼고,
+  형식이 어긋나면 조용히 기본값으로, **예외 시에는 무조건 통과** 처리했습니다.
+  → 구조화 출력(스키마 강제)으로 구현할 것.
+- **설정 이중화** — 개발/운영 설정 클래스를 나눠놓고 앱 전체가 개발용을 하드 임포트해,
+  운영 설정이 죽은 코드가 됐습니다. → 환경변수 기반 단일 설정.
+- **검증 로직을 주석 처리한 채 방치** — 세션·코인 검증이 통째로 주석 처리되어
+  MVP의 "세션당 5코인" 정책이 무력화된 상태로 남았습니다.
+- **도달 불가 코드** — 스트리밍 함수 중간의 `return` 이후 약 50줄이 죽어 있었고,
+  그 결과 토론 시작/완료 이벤트가 실제로는 발송되지 않았습니다.
+- **노드가 전체 상태를 반환** — LangGraph의 부분 업데이트 관례와 어긋나고 리듀서와 충돌합니다.
+  리스트 상태를 in-place `append` 후 반환한 것도 체크포인트 복원 시 위험합니다.
+- **의존성 정의 이중화** — `requirements.txt`와 `pyproject.toml`의 버전이 서로 달랐습니다.
+  → uv/`pyproject.toml` 하나만 유지.
+
+### 프로세스 실패
+- **문서가 구현을 앞질러 "완료"로 기록됨** — `docs/6`이 "70% 완료"였지만 실제로는
+  해피패스 데모 수준이었습니다. TASK를 완료로 표시하기 전에 성공 기준을 실제로 검증하십시오.
+- **시크릿을 저장소에 커밋** — OpenAI 키가 `.env`째로 커밋됐습니다(해당 키는 폐기됨).
+  현재 `.gitignore`(UTF-8)가 `.env`, `*.db`를 차단합니다. **`.gitignore`를 저장할 때
+  인코딩이 UTF-16으로 되돌아가지 않는지 주의하십시오** — 1차 시도에서 UTF-16 LE로 저장되어
+  git이 규칙을 전혀 읽지 못했습니다.
+
+---
+
+## 5. 개발 원칙
 
 이 프로젝트는 **문서 기반 개발**을 유지합니다.
 
-1. 구현 전 `docs/`의 해당 설계 문서를 먼저 갱신하고, 그 문서를 근거로 코드를 작성합니다.
-2. 작업 완료 후 CLAUDE.md와 영향받는 설계 문서를 갱신합니다.
-3. 변경 영역별 문서 매핑:
-   - 기능 → `docs/2_detailed_functional_specification.md`
-   - UI → `docs/3_ui_design_system.md`
-   - API → `docs/4_api_specification.md`
-   - 스키마 → `docs/5_data_model_schema.md`
-   - TASK 상태 → `docs/6_master_execution_plan.md`
-   - 테스트 → `docs/7_unit_Integration_Test.md`, 버그 → `docs/8_bug_report.md`
-4. **레거시 코드를 근거로 삼지 마십시오.** 위 3장의 갭 목록에 해당하는 동작은 "구현됨"으로 간주하지 않습니다.
+1. `docs/6_master_execution_plan.md`에서 다음 TASK를 선택하고 상태를 "준비됨" → "진행 중"으로 변경
+2. 관련 설계 문서를 먼저 갱신하고, 그 문서를 근거로 구현
+3. TASK 완료 시 **성공 기준을 실제로 검증한 뒤** "완료"로 변경
+4. 작업 후 CLAUDE.md와 영향받는 설계 문서를 갱신
 
-### MVP 범위 (docs/0 §6 기준, 유효)
-- 인증 없음, 세션당 5코인 → 이후 OAuth2 + 결제
-- 일방향 그룹채팅 UX → 이후 사용자 개입 포인트 추가
-- 비용 무시하고 품질 우선 → 이후 토큰 최적화
-- 텍스트 전용 (멀티모달 계획 없음)
-- 배포 타겟: Docker 이미지 → 홈서버
+변경 영역별 문서 매핑:
+
+| 변경 내용 | 갱신할 문서 |
+|---|---|
+| 기능 추가/변경 | `docs/2_detailed_functional_specification.md` |
+| UI 컴포넌트 | `docs/3_ui_design_system.md` |
+| API | `docs/4_api_specification.md` |
+| 데이터 스키마 | `docs/5_data_model_schema.md` |
+| TASK 상태 | `docs/6_master_execution_plan.md` |
+| 테스트 케이스 | `docs/7_unit_Integration_Test.md` |
+| 버그 | `docs/8_bug_report.md` |
+
+문서는 번호로 서로를 참조하므로(n번 → 0번~(n-1)번), **파일명에 버전 접미사를 붙이지 말고
+같은 파일을 직접 갱신**하십시오. 이력은 git이 관리합니다.
+
+---
+
+## 6. MVP 범위 (docs/0 §6 기준, 유효)
+
+- **인증**: 없음. 세션당 5코인 → 확장 시 OAuth2 + 결제
+- **UX**: 일방향 그룹채팅 (6개 아바타가 순차 등장) → 확장 시 사용자 개입 포인트 추가
+- **비용**: 무시하고 품질 우선 → 확장 시 토큰 최적화
+- **입출력**: 텍스트 전용 (멀티모달 계획 없음)
+- **통신**: SSE 단방향 스트리밍 (WebSocket은 과설계로 판단)
+- **LLM**: 1차 설계는 gpt-4o-mini 단일 모델 기준 — **모델 선정은 재검토 대상**
+- **배포**: Docker 이미지 → 홈서버
+- **관찰성**: LangSmith 도입 예정
