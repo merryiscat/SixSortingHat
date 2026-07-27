@@ -1,1 +1,0 @@
-# Quality verification prompts module

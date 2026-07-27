@@ -13,7 +13,8 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./backend/init_scripts:/docker-entrypoint-initdb.d
+      # 초기화 SQL 이 필요해지면 아래를 되살리고 해당 경로를 만드십시오.
+      # - ./backend/init_scripts:/docker-entrypoint-initdb.d
     restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U sixsortinghat -d sixsortinghat"]
