@@ -27,3 +27,6 @@ venv/
 Thumbs.db
 .idea/
 .vscode/
+
+# Claude Code 개인 로컬 설정 (권한 승인 기록 — 기기마다 다름)
+.claude/settings.local.json
