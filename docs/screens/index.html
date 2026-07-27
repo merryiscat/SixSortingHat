@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SixSortingHat — 화면 목록</title>
+<link rel="stylesheet" href="wireframe.css">
+</head>
+<body>
+<div class="page">
+
+  <div class="meta">
+    <div class="meta__id">index</div>
+    <h1 class="meta__title">SixSortingHat 챗봇 — 화면 목록</h1>
+    <p class="meta__purpose">흑백 와이어프레임. 규약은 <a href="README.md">README.md</a>.</p>
+    <div class="meta__grid">
+      <div class="meta__k">전제</div>
+      <div class="meta__v">반응형 웹 · 모바일 우선 / 개입형</div>
+      <div class="meta__k">확인 폭</div>
+      <div class="meta__v">375×812 · 768×1024 · 1280×900</div>
+      <div class="meta__k">작성일</div>
+      <div class="meta__v">2026-07-27</div>
+    </div>
+  </div>
+
+  <h2 style="margin-bottom: var(--s-3);">화면</h2>
+  <div class="nav">
+
+    <a class="nav__item" href="D1.html">
+      <div class="meta__id">D1</div>
+      <div><b>토론 진행</b></div>
+      <div class="small muted">확정 · 보편 A 의견 카드 · 상태 4종</div>
+    </a>
+
+    <a class="nav__item" href="D1-options.html">
+      <div class="meta__id">D1-options</div>
+      <div><b>토론 진행 — 4안</b></div>
+      <div class="small muted">보편 A 채택. 탈락안 보존</div>
+    </a>
+
+    <span class="nav__item nav__item--todo">
+      <div class="meta__id">I1</div>
+      <div><b>주제 입력</b></div>
+      <div class="small">다음 차례</div>
+    </span>
+
+    <span class="nav__item nav__item--todo">
+      <div class="meta__id">R1</div>
+      <div><b>결과·요약</b></div>
+      <div class="small">I1 다음</div>
+    </span>
+
+    <span class="nav__item nav__item--todo">
+      <div class="meta__id">H1</div>
+      <div><b>토론 기록</b></div>
+      <div class="small">핵심 3화면 후</div>
+    </span>
+
+    <span class="nav__item nav__item--todo">
+      <div class="meta__id">S1</div>
+      <div><b>설정</b></div>
+      <div class="small">핵심 3화면 후</div>
+    </span>
+
+  </div>
+
+  <h2 style="margin: var(--s-5) 0 var(--s-3);">흐름</h2>
+  <div class="card">
+    <p class="small">I1 <span class="muted">주제 전송 →</span> D1 <span class="muted">사이클 종료 →</span> R1</p>
+    <p class="small" style="margin-top: var(--s-2);">D1 <span class="muted">사용자 발언 / 다음 의견 →</span> D1</p>
+    <p class="small" style="margin-top: var(--s-2);">R1 <span class="muted">재토론 →</span> D1</p>
+    <p class="small" style="margin-top: var(--s-2);">H1 <span class="muted">→</span> D1 <span class="muted">(진행 중)</span> / R1 <span class="muted">(완료분)</span></p>
+  </div>
+
+  <h2 style="margin: var(--s-5) 0 var(--s-3);">사이클</h2>
+  <div class="card">
+    <p class="small">파랑 진행 <span class="muted">→</span> 모자 X 의견 제시 <span class="muted">→</span> 나머지 5개 평가 <span class="muted">→</span> 파랑 종합 점수 <span class="muted">→</span> 사용자 발언 / 다음 의견</p>
+    <p class="small muted" style="margin-top: var(--s-2);">파랑 점수는 5개의 평균이 아니다. 파랑의 독자 판단.</p>
+  </div>
+
+</div>
+</body>
+</html>

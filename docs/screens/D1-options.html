@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>D1 토론 진행 — 4안</title>
+<link rel="stylesheet" href="wireframe.css">
+</head>
+<body>
+<div class="page">
+
+  <div class="meta">
+    <div class="meta__id">D1-options</div>
+    <h1 class="meta__title">토론 진행 — 4안</h1>
+    <p class="meta__purpose">의견 하나가 평가받고 점수가 매겨지는 사이클을 따라가면서, 끼어들 수 있는가.</p>
+    <div class="meta__grid">
+      <div class="meta__k">기본 단위</div>
+      <div class="meta__v"><b>의견</b> 하나 (모자의 발언이 아님)</div>
+      <div class="meta__k">사이클</div>
+      <div class="meta__v">모자 X 의견 제시 → 나머지 5개 평가 → 파랑 종합 점수 → 사용자 발언 / 다음 의견</div>
+      <div class="meta__k">네 안의 차이</div>
+      <div class="meta__v">5개 평가와 파랑 점수를 <b>어느 위계로 드러내는가</b>, 사용자 차례가 어디 붙는가</div>
+      <div class="meta__k">지켜야 할 것</div>
+      <div class="meta__v">파랑 점수는 5개의 <b>평균이 아니다</b>. 평균·합계·총점 라벨 금지</div>
+      <div class="meta__k">미정</div>
+      <div class="meta__v">모자 탈락 여부 미정 → 어느 안에도 탈락 UI를 넣지 않음</div>
+      <div class="meta__k">작성일</div>
+      <div class="meta__v">2026-07-27</div>
+    </div>
+  </div>
+
+  <div class="options">
+
+    <!-- ─────────────────────────── 보편 A ─────────────────────────── -->
+    <div class="option">
+      <div class="option__head">
+        <div class="option__kind">보편 A</div>
+        <h2 class="option__name">의견 카드</h2>
+        <p class="option__concept">의견 하나 = 카드 하나. 평가와 파랑 점수까지 한 카드 안에 닫힌다.</p>
+      </div>
+
+      <div class="frame frame--app">
+        <div class="frame__label">375 / 종합 완료 · 내 차례</div>
+
+        <div class="topbar">
+          <span class="topbar__back">←</span>
+          <span class="topbar__title"><span class="token">{주제}</span></span>
+          <span class="topbar__action">의견 3</span>
+        </div>
+
+        <div class="body">
+
+          <div class="card card--tight row row--between">
+            <span class="small muted">지난 의견 2</span>
+            <span class="small muted">펼치기</span>
+          </div>
+
+          <div class="opinion">
+            <div class="opinion__head">
+              <span class="hat__sw" style="background: repeating-linear-gradient(0deg,var(--c-0) 0 1px,var(--c-6) 1px 4px), repeating-linear-gradient(90deg,var(--c-0) 0 1px,var(--c-6) 1px 4px);"></span>
+              <span class="hat__name">초록</span>
+              <span class="hat__role">창의·대안</span>
+            </div>
+
+            <div class="opinion__body">
+              <p><span class="token">{의견}</span></p>
+            </div>
+
+            <div class="opinion__evals">
+              <div class="opinion__evals-label">다른 모자 평가</div>
+              <div class="eval">
+                <span class="eval__name">하양</span>
+                <span class="bar"><i style="width:70%"></i></span>
+                <span class="eval__why grow"><span class="token">{평가}</span></span>
+              </div>
+              <div class="eval">
+                <span class="eval__name">빨강</span>
+                <span class="bar"><i style="width:85%"></i></span>
+                <span class="eval__why grow"><span class="token">{평가}</span></span>
+              </div>
+              <div class="eval">
+                <span class="eval__name">검정</span>
+                <span class="bar"><i style="width:30%"></i></span>
+                <span class="eval__why grow"><span class="token">{평가}</span></span>
+              </div>
+              <div class="eval">
+                <span class="eval__name">노랑</span>
+                <span class="bar"><i style="width:80%"></i></span>
+                <span class="eval__why grow"><span class="token">{평가}</span></span>
+              </div>
+              <div class="eval">
+                <span class="eval__name">파랑</span>
+                <span class="bar"><i style="width:0%"></i></span>
+                <span class="eval__why grow muted">종합 담당</span>
+              </div>
+            </div>
+
+            <div class="verdict">
+              <span class="hat__sw" style="background: repeating-linear-gradient(0deg,var(--c-0) 0 1px,var(--c-6) 1px 4px);"></span>
+              <span class="grow">
+                <span class="verdict__label">파랑 판단</span>
+                <div class="row">
+                  <span class="bar bar--lg"><i style="width:55%"></i></span>
+                  <span class="verdict__score"><span class="token">{점수}</span></span>
+                </div>
+              </span>
+            </div>
+          </div>
+
+          <div class="turn">
+            <div class="turn__label">내 차례</div>
+            <div class="row">
+              <span class="input"><span class="token">{개입}</span></span>
+              <span class="btn btn--sm btn--primary">전송</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="bottombar">
+          <span class="btn btn--block">다음 의견</span>
+        </div>
+      </div>
+
+      <dl class="option__note">
+        <dt>사용자 차례</dt>
+        <dd>카드 <b>아래 슬롯</b>. 종합이 끝나면 열린다. 넘기려면 [다음 의견].</dd>
+        <dt>강점</dt>
+        <dd>의견 하나의 전체 판정이 한 카드에서 닫힌다. 근거를 다 보고 개입한다.</dd>
+        <dt>약점</dt>
+        <dd>카드가 세로로 길다. 의견이 쌓일수록 이전 것과 비교하기 어렵다.</dd>
+      </dl>
+    </div>
+
+    <!-- ─────────────────────────── 보편 B ─────────────────────────── -->
+    <div class="option">
+      <div class="option__head">
+        <div class="option__kind">보편 B</div>
+        <h2 class="option__name">파랑 진행</h2>
+        <p class="option__concept">파랑이 화면을 끈다. 평가는 접혀 있고 파랑의 판단이 먼저 온다.</p>
+      </div>
+
+      <div class="frame frame--app">
+        <div class="frame__label">375 / 평가 중</div>
+
+        <div class="topbar">
+          <span class="topbar__back">←</span>
+          <span class="topbar__title"><span class="token">{주제}</span></span>
+          <span class="topbar__action">사이클 <span class="token">{사이클}</span></span>
+        </div>
+
+        <div class="body">
+
+          <div class="hat hat--blue">
+            <div class="hat__head">
+              <span class="hat__sw"></span>
+              <span class="hat__name">파랑</span>
+              <span class="hat__role">진행·종합</span>
+            </div>
+            <p class="small"><span class="token">{진행}</span></p>
+          </div>
+
+          <div class="opinion">
+            <div class="opinion__head">
+              <span class="hat__sw" style="background:var(--c-6)"></span>
+              <span class="hat__name">하양</span>
+              <span class="hat__role">사실·정보</span>
+              <span class="grow"></span>
+              <span class="status small">평가 중</span>
+            </div>
+            <div class="opinion__body">
+              <p><span class="token">{의견}</span></p>
+            </div>
+            <div class="opinion__evals row row--between">
+              <span class="small muted">평가 3/5</span>
+              <span class="small">펼치기</span>
+            </div>
+            <div class="verdict">
+              <span class="grow">
+                <span class="verdict__label">파랑 판단</span>
+                <div class="small muted">종합 중</div>
+              </span>
+            </div>
+          </div>
+
+          <div class="opinion">
+            <div class="opinion__head">
+              <span class="hat__sw" style="background: repeating-linear-gradient(0deg,var(--c-0) 0 1px,var(--c-6) 1px 4px), repeating-linear-gradient(90deg,var(--c-0) 0 1px,var(--c-6) 1px 4px);"></span>
+              <span class="hat__name">초록</span>
+              <span class="grow"></span>
+              <span class="small muted">완료</span>
+            </div>
+            <div class="verdict">
+              <span class="grow">
+                <span class="verdict__label">파랑 판단</span>
+                <div class="row">
+                  <span class="bar bar--lg"><i style="width:55%"></i></span>
+                  <span class="verdict__score"><span class="token">{점수}</span></span>
+                </div>
+              </span>
+              <span class="btn btn--sm btn--ghost">근거</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="bottombar">
+          <span class="grow status">진행 중</span>
+          <span class="btn btn--sm">말하기</span>
+        </div>
+      </div>
+
+      <dl class="option__note">
+        <dt>사용자 차례</dt>
+        <dd>파랑이 사이클을 넘길 때 슬롯이 열린다. 그 외에는 하단 <b>[말하기]</b>로 요청.</dd>
+        <dt>강점</dt>
+        <dd>파랑이 지휘자임이 화면에서 바로 읽힌다. 결론(점수)이 먼저, 근거는 요청 시.</dd>
+        <dt>약점</dt>
+        <dd>5개 평가가 기본으로 안 보여 "왜 이 점수인지"가 한 단계 멀다.</dd>
+      </dl>
+    </div>
+
+    <!-- ─────────────────────────── 실험 A ─────────────────────────── -->
+    <div class="option">
+      <div class="option__head">
+        <div class="option__kind">실험 A</div>
+        <h2 class="option__name">순위표 상주</h2>
+        <p class="option__concept">의견들이 겨룬다. 순위가 상단에 고정되고 아래에서 평가가 진행된다.</p>
+      </div>
+
+      <div class="frame frame--app">
+        <div class="frame__label">375 / 평가 진행 중</div>
+
+        <div class="topbar">
+          <span class="topbar__back">←</span>
+          <span class="topbar__title"><span class="token">{주제}</span></span>
+          <span class="topbar__action">의견 3</span>
+        </div>
+
+        <div style="padding: var(--s-3); border-bottom: 1px solid var(--c-0);">
+          <div class="rank">
+            <div class="rank__item">
+              <span class="rank__no">1</span>
+              <span class="grow small"><span class="token">{의견}</span></span>
+              <span class="bar"><i style="width:80%"></i></span>
+            </div>
+            <div class="rank__item">
+              <span class="rank__no">2</span>
+              <span class="grow small"><span class="token">{의견}</span></span>
+              <span class="bar"><i style="width:55%"></i></span>
+            </div>
+            <div class="rank__item is-now">
+              <span class="rank__no">—</span>
+              <span class="grow small"><span class="token">{의견}</span></span>
+              <span class="status small">평가 중</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="body">
+          <div class="opinion">
+            <div class="opinion__head">
+              <span class="hat__sw" style="background:var(--c-0)"></span>
+              <span class="hat__name">검정</span>
+              <span class="hat__role">위험·비판</span>
+            </div>
+            <div class="opinion__body">
+              <p><span class="token">{의견}</span></p>
+            </div>
+            <div class="opinion__evals">
+              <div class="opinion__evals-label">평가 3/5</div>
+              <div class="eval">
+                <span class="eval__name">하양</span>
+                <span class="bar"><i style="width:65%"></i></span>
+              </div>
+              <div class="eval">
+                <span class="eval__name">노랑</span>
+                <span class="bar"><i style="width:40%"></i></span>
+              </div>
+              <div class="eval">
+                <span class="eval__name">초록</span>
+                <span class="bar"><i style="width:75%"></i></span>
+              </div>
+              <div class="eval">
+                <span class="eval__name">빨강</span>
+                <span class="grow small muted">대기</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bottombar">
+          <span class="input">이 의견에</span>
+          <span class="btn btn--sm btn--primary">전송</span>
+        </div>
+      </div>
+
+      <dl class="option__note">
+        <dt>사용자 차례</dt>
+        <dd>하단 입력이 <b>항상 "지금 의견"에 걸린다</b>. 순위표의 지난 의견을 눌러 대상 변경.</dd>
+        <dt>강점</dt>
+        <dd>의견 간 비교가 즉시 된다. 점수가 왜 필요한지가 화면에서 설명된다.</dd>
+        <dt>약점</dt>
+        <dd>경쟁 은유가 강해 "사고 확장"보다 "선별"로 읽힐 수 있다. 상단이 자리를 먹는다.</dd>
+      </dl>
+    </div>
+
+    <!-- ─────────────────────────── 실험 B ─────────────────────────── -->
+    <div class="option">
+      <div class="option__head">
+        <div class="option__kind">실험 B</div>
+        <h2 class="option__name">평가 매트릭스</h2>
+        <p class="option__concept">의견 × 모자 격자. 어떤 의견이 <b>어느 관점에서</b> 강한지가 한눈에.</p>
+      </div>
+
+      <div class="frame frame--app">
+        <div class="frame__label">375 / 격자 · 가로 스크롤</div>
+
+        <div class="topbar">
+          <span class="topbar__back">←</span>
+          <span class="topbar__title"><span class="token">{주제}</span></span>
+          <span class="topbar__action">3×5</span>
+        </div>
+
+        <div style="padding: var(--s-3); border-bottom: 1px solid var(--c-4);">
+          <div class="matrix-wrap">
+            <table class="matrix">
+              <thead>
+                <tr>
+                  <th>의견</th>
+                  <th>하양</th>
+                  <th>빨강</th>
+                  <th>검정</th>
+                  <th>노랑</th>
+                  <th>초록</th>
+                  <th class="col-blue">파랑</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>초록</td>
+                  <td><span class="bar" style="width:28px"><i style="width:70%"></i></span></td>
+                  <td><span class="bar" style="width:28px"><i style="width:85%"></i></span></td>
+                  <td><span class="bar" style="width:28px"><i style="width:30%"></i></span></td>
+                  <td><span class="bar" style="width:28px"><i style="width:80%"></i></span></td>
+                  <td class="muted">—</td>
+                  <td class="col-blue"><span class="bar bar--lg" style="width:32px"><i style="width:55%"></i></span></td>
+                </tr>
+                <tr>
+                  <td>하양</td>
+                  <td class="muted">—</td>
+                  <td><span class="bar" style="width:28px"><i style="width:45%"></i></span></td>
+                  <td><span class="bar" style="width:28px"><i style="width:75%"></i></span></td>
+                  <td><span class="bar" style="width:28px"><i style="width:60%"></i></span></td>
+                  <td><span class="bar" style="width:28px"><i style="width:50%"></i></span></td>
+                  <td class="col-blue"><span class="bar bar--lg" style="width:32px"><i style="width:80%"></i></span></td>
+                </tr>
+                <tr class="is-now">
+                  <td>검정</td>
+                  <td><span class="bar" style="width:28px"><i style="width:65%"></i></span></td>
+                  <td class="small muted">대기</td>
+                  <td class="muted">—</td>
+                  <td><span class="bar" style="width:28px"><i style="width:40%"></i></span></td>
+                  <td><span class="bar" style="width:28px"><i style="width:75%"></i></span></td>
+                  <td class="col-blue small muted">종합 중</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="body">
+          <div class="opinion">
+            <div class="opinion__head">
+              <span class="hat__sw" style="background:var(--c-0)"></span>
+              <span class="hat__name">검정</span>
+              <span class="grow"></span>
+              <span class="status small">평가 중</span>
+            </div>
+            <div class="opinion__body">
+              <p><span class="token">{의견}</span></p>
+              <p class="small muted" style="margin-top: var(--s-2);">초록 <span class="token">{평가}</span></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bottombar">
+          <span class="input">검정 의견에</span>
+          <span class="btn btn--sm btn--primary">전송</span>
+        </div>
+      </div>
+
+      <dl class="option__note">
+        <dt>사용자 차례</dt>
+        <dd>격자 칸을 눌러 그 평가에 개입. 행을 눌러 의견 전체에 개입.</dd>
+        <dt>강점</dt>
+        <dd>"검정은 낮게 봤는데 노랑은 높게 봤다" 같은 <b>관점 차이</b>가 유일하게 보이는 안.</dd>
+        <dt>약점</dt>
+        <dd>모바일에서 가로 스크롤 필수. 의견 본문이 격자 밖으로 밀린다.</dd>
+      </dl>
+    </div>
+
+  </div>
+
+  <div class="notes">
+    <h3>의도</h3>
+    <ul>
+      <li>기본 단위를 <b>의견</b>으로 바꿨다. 모자가 순서대로 말하는 화면이 아니라,
+          의견 하나가 평가받고 점수가 매겨지는 화면이다.</li>
+      <li>네 안은 <b>5개 평가와 파랑 점수의 위계</b>에서 갈린다.
+          A는 둘 다 펼침 / B는 파랑만 먼저 / 실험 A는 의견 간 비교 우선 /
+          실험 B는 관점별 차이 우선.</li>
+      <li>파랑 점수는 어느 안에서도 5개 평가와 같은 줄에 두지 않았다.
+          평균으로 읽히면 안 되므로 <span class="token">.verdict</span> 로 분리하고
+          "평균·합계·총점" 라벨을 쓰지 않았다.</li>
+      <li>점수 스케일이 미정이라 숫자를 박지 않고 <b>막대 + 토큰</b>으로 표현했다.
+          스케일이 정해지면 막대 옆 토큰만 숫자로 바뀐다.</li>
+      <li>의견 제시 순서를 초록 → 하양 → 검정으로 그렸다. 순서가 실행마다
+          달라진다는 규칙을 와이어에서도 드러내려고 하양부터 시작하지 않았다.</li>
+      <li>자기 의견에는 자기가 평가하지 않으므로 해당 칸을 <span class="token">—</span> 로 비웠다.</li>
+    </ul>
+
+    <h3>대안</h3>
+    <ul>
+      <li>이전 4안(순차 스트림 / 라운드 보드 / 한 장씩 / 수집 보드) — 발언 나열이 전제라
+          평가·점수 구조가 들어갈 자리가 없어 전부 폐기.</li>
+      <li>파랑 점수를 5개 평균 막대와 나란히 비교 표시 — 평균으로 오해될 소지가 커서 제외.</li>
+      <li>탈락 UI(모자 제외) — 아직 고민 중인 사항이라 어느 안에도 넣지 않음.</li>
+    </ul>
+
+    <h3>미정</h3>
+    <ul>
+      <li><b>점수 스케일</b> — 0~10 / 0~100 / 5점 척도. 확정되면 막대 옆 표기가 정해진다.</li>
+      <li>평가에 <b>한 줄 근거</b>가 항상 붙는지, 점수만 있는지 (보편 A는 있음 전제, 실험 A는 없음 전제)</li>
+      <li>모자당 의견 1~2회 중 <b>2회째를 언제 내는지</b> — 한 바퀴 후인지 연속인지</li>
+      <li>사이클 종료 조건, 모자 탈락 여부 — 정해지면 확정안에 상태 추가</li>
+      <li>사용자 발언이 점수를 <b>바꾸는지</b>, 다음 의견에만 반영되는지</li>
+      <li>오류(평가 실패) 상태 표현 — 확정안에서 상태 프레임으로 추가</li>
+    </ul>
+  </div>
+
+</div>
+</body>
+</html>
