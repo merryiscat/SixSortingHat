@@ -1,0 +1,775 @@
+/* SixSortingHat 와이어프레임 공용 스타일시트
+   흑백만 사용. 컬러·그림자·그라데이션 금지. 구조는 1px 보더로 표현. */
+
+:root {
+  /* 회색 6단계 */
+  --c-0: #000;
+  --c-1: #333;
+  --c-2: #666;
+  --c-3: #999;
+  --c-4: #ccc;
+  --c-5: #eee;
+  --c-6: #fff;
+
+  /* 4px scale */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 64px;
+
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Malgun Gothic",
+          "맑은 고딕", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  --mono: "SFMono-Regular", Consolas, "D2Coding", monospace;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  padding: var(--s-4);
+  font-family: var(--font);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--c-0);
+  background: var(--c-6);
+}
+
+h1, h2, h3, h4 { margin: 0; font-weight: 600; }
+p { margin: 0; }
+ul, ol { margin: 0; padding-left: var(--s-5); }
+a { color: var(--c-0); }
+
+/* ─── 페이지 골격 ─────────────────────────────────────────
+   .page > .meta
+          > .layout > .frame + .notes                       */
+
+.page { max-width: 1400px; margin: 0 auto; }
+
+.layout { display: block; }
+
+@media (min-width: 1024px) {
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: var(--s-5);
+    align-items: start;
+  }
+}
+
+/* ─── 메타 블록 ─────────────────────────────────────────── */
+
+.meta {
+  border: 1px solid var(--c-0);
+  padding: var(--s-4);
+  margin-bottom: var(--s-5);
+}
+
+.meta__id {
+  display: inline-block;
+  border: 1px solid var(--c-0);
+  padding: 0 var(--s-2);
+  font-family: var(--mono);
+  font-size: 12px;
+  margin-bottom: var(--s-2);
+}
+
+.meta__title { font-size: 18px; margin-bottom: var(--s-1); }
+.meta__purpose { color: var(--c-1); margin-bottom: var(--s-3); }
+
+.meta__grid { display: grid; gap: var(--s-2); }
+
+@media (min-width: 768px) {
+  .meta__grid { grid-template-columns: 120px 1fr; gap: var(--s-2) var(--s-4); }
+}
+
+.meta__k {
+  font-size: 12px;
+  color: var(--c-2);
+  border-top: 1px solid var(--c-5);
+  padding-top: var(--s-2);
+}
+
+.meta__v {
+  font-size: 13px;
+  border-top: 1px solid var(--c-5);
+  padding-top: var(--s-2);
+}
+
+@media (max-width: 767px) {
+  .meta__v { border-top: 0; padding-top: 0; }
+}
+
+/* ─── 프레임 (화면 본체) ───────────────────────────────── */
+
+.frames { display: grid; gap: var(--s-5); }
+
+@media (min-width: 768px) {
+  .frames--multi { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+}
+
+.frame {
+  border: 1px solid var(--c-0);
+  background: var(--c-6);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.frame--app { min-height: 640px; }
+
+.frame__label {
+  font-size: 12px;
+  font-family: var(--mono);
+  color: var(--c-2);
+  border-bottom: 1px solid var(--c-4);
+  padding: var(--s-2) var(--s-3);
+  background: var(--c-5);
+}
+
+/* 상단바 */
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  border-bottom: 1px solid var(--c-0);
+  padding: var(--s-3);
+  min-height: 48px;
+}
+
+.topbar__back { font-size: 16px; }
+.topbar__title { font-size: 14px; font-weight: 600; flex: 1; min-width: 0; }
+.topbar__action { font-size: 12px; color: var(--c-1); white-space: nowrap; }
+
+/* 본문 */
+.body {
+  flex: 1;
+  padding: var(--s-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  min-width: 0;
+}
+
+.body--flush { padding: 0; }
+
+/* 하단 고정바 */
+.bottombar {
+  border-top: 1px solid var(--c-0);
+  padding: var(--s-3);
+  display: flex;
+  gap: var(--s-2);
+  align-items: center;
+}
+
+/* 하단 탭 */
+.tabbar {
+  border-top: 1px solid var(--c-0);
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+}
+
+.tabbar__item {
+  text-align: center;
+  padding: var(--s-3) var(--s-1);
+  font-size: 12px;
+  border-right: 1px solid var(--c-4);
+  color: var(--c-2);
+}
+
+.tabbar__item:last-child { border-right: 0; }
+.tabbar__item.is-active { color: var(--c-0); font-weight: 600; }
+
+/* ─── 컴포넌트 ─────────────────────────────────────────── */
+
+.card {
+  border: 1px solid var(--c-4);
+  padding: var(--s-3);
+  min-width: 0;
+}
+
+.card--tight { padding: var(--s-2) var(--s-3); }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-1);
+  border: 1px solid var(--c-0);
+  background: var(--c-6);
+  padding: var(--s-2) var(--s-3);
+  font: inherit;
+  font-size: 13px;
+  min-height: 36px;
+  cursor: default;
+  white-space: nowrap;
+}
+
+.btn--primary { background: var(--c-0); color: var(--c-6); }
+.btn--ghost { border-color: var(--c-4); color: var(--c-1); }
+.btn--sm { min-height: 28px; padding: var(--s-1) var(--s-2); font-size: 12px; }
+.btn--block { width: 100%; }
+.btn--disabled { border-color: var(--c-4); color: var(--c-4); }
+
+.input {
+  flex: 1;
+  border: 1px solid var(--c-3);
+  padding: var(--s-2) var(--s-3);
+  min-height: 36px;
+  color: var(--c-3);
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.textarea {
+  border: 1px solid var(--c-3);
+  padding: var(--s-3);
+  min-height: 96px;
+  color: var(--c-3);
+  font-size: 13px;
+}
+
+.token {
+  font-family: var(--mono);
+  font-size: 0.92em;
+  color: var(--c-1);
+  background: var(--c-5);
+  padding: 0 2px;
+}
+
+.img-ph {
+  border: 1px solid var(--c-3);
+  background:
+    linear-gradient(to top right,
+      transparent calc(50% - 0.5px), var(--c-3) 50%, transparent calc(50% + 0.5px)),
+    linear-gradient(to bottom right,
+      transparent calc(50% - 0.5px), var(--c-3) 50%, transparent calc(50% + 0.5px));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px;
+  font-size: 11px;
+  color: var(--c-2);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-1);
+  border: 1px solid var(--c-3);
+  padding: 2px var(--s-2);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.chip.is-on { border-color: var(--c-0); background: var(--c-0); color: var(--c-6); }
+
+.chips {
+  display: flex;
+  gap: var(--s-2);
+  flex-wrap: wrap;
+}
+
+.chips--scroll {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding-bottom: var(--s-1);
+}
+
+.status {
+  font-size: 12px;
+  color: var(--c-2);
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+.divider { border-top: 1px solid var(--c-4); }
+
+.muted { color: var(--c-2); }
+.small { font-size: 12px; }
+.row { display: flex; gap: var(--s-2); align-items: center; min-width: 0; }
+.row--between { justify-content: space-between; }
+.grow { flex: 1; min-width: 0; }
+.stack { display: flex; flex-direction: column; gap: var(--s-3); min-width: 0; }
+.stack--tight { gap: var(--s-2); }
+
+/* ─── 모자 ─────────────────────────────────────────────
+   흑백이므로 보더 스타일 + 스와치 패턴으로 구분.
+   docs/screens/README.md 의 표와 1:1 대응.                */
+
+.hat { border: 1px solid var(--c-4); padding: var(--s-3); min-width: 0; }
+
+.hat__head {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  margin-bottom: var(--s-2);
+}
+
+.hat__name { font-size: 13px; font-weight: 600; }
+.hat__role { font-size: 11px; color: var(--c-2); }
+
+.hat__sw {
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--c-0);
+  flex: none;
+}
+
+.hat--white  { border: 1px solid var(--c-4); }
+.hat--red    { border: 1px dashed var(--c-2); }
+.hat--black  { border: 2px solid var(--c-0); }
+.hat--yellow { border: 1px dotted var(--c-2); }
+.hat--green  { border: 3px double var(--c-2); }
+.hat--blue   { border: 1px solid var(--c-4); border-left: 4px solid var(--c-0); }
+
+.hat--white  .hat__sw { background: var(--c-6); }
+.hat--black  .hat__sw { background: var(--c-0); }
+.hat--red    .hat__sw {
+  background: repeating-linear-gradient(45deg,
+    var(--c-0) 0 1px, var(--c-6) 1px 4px);
+}
+.hat--yellow .hat__sw {
+  background: radial-gradient(var(--c-0) 0.8px, var(--c-6) 0.9px);
+  background-size: 4px 4px;
+}
+.hat--green  .hat__sw {
+  background:
+    repeating-linear-gradient(0deg, var(--c-0) 0 1px, var(--c-6) 1px 4px),
+    repeating-linear-gradient(90deg, var(--c-0) 0 1px, var(--c-6) 1px 4px);
+}
+.hat--blue   .hat__sw {
+  background: repeating-linear-gradient(0deg,
+    var(--c-0) 0 1px, var(--c-6) 1px 4px);
+}
+
+/* 대기·생성중 상태 */
+.hat--pending { border-style: dashed; border-color: var(--c-4); color: var(--c-3); }
+.hat--pending .hat__name { color: var(--c-3); }
+
+/* 진행 인디케이터 */
+.progress {
+  display: flex;
+  gap: var(--s-1);
+  align-items: center;
+}
+
+.progress__step {
+  flex: 1;
+  height: 4px;
+  border: 1px solid var(--c-3);
+  min-width: 8px;
+}
+
+.progress__step.is-done { background: var(--c-0); border-color: var(--c-0); }
+.progress__step.is-now  { background: var(--c-3); border-color: var(--c-0); }
+
+/* ─── 의견 · 평가 · 종합 점수 ───────────────────────────
+   화면의 기본 단위는 "발언"이 아니라 "의견"이다.
+   점수 스케일이 미정이므로 숫자를 박지 않고 막대 + 토큰으로 표현한다. */
+
+.opinion { border: 1px solid var(--c-0); min-width: 0; }
+
+.opinion__head {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: var(--s-2) var(--s-3);
+  border-bottom: 1px solid var(--c-4);
+  background: var(--c-5);
+}
+
+/* 본문 — 의견 하나는 블록 1~4개. 블록이 여럿이어도 평가는 의견 전체에 한 번. */
+.opinion__body { padding: var(--s-3); display: flex; flex-direction: column; gap: var(--s-2); }
+
+.blk {
+  border-left: 2px solid var(--c-4);
+  padding-left: var(--s-2);
+  min-width: 0;
+}
+
+.opinion__evals {
+  border-top: 1px solid var(--c-4);
+  padding: var(--s-2) var(--s-3);
+}
+
+.opinion__evals-label {
+  font-size: 11px;
+  color: var(--c-2);
+  margin-bottom: var(--s-2);
+}
+
+/* 5개 모자의 평가 한 줄 */
+.eval {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: var(--s-1) 0;
+  min-width: 0;
+}
+
+.eval__name { font-size: 12px; width: 32px; flex: none; }
+.eval__why  { font-size: 11px; color: var(--c-2); min-width: 0; }
+
+/* 점수 숫자 — 0~10 정수 */
+.n {
+  font-family: var(--mono);
+  font-size: 12px;
+  width: 14px;
+  flex: none;
+  text-align: right;
+}
+
+/* 점수 막대 — 숫자 없이 상대 크기만 */
+.bar {
+  height: 8px;
+  border: 1px solid var(--c-2);
+  flex: none;
+  width: 56px;
+  position: relative;
+  background: var(--c-6);
+}
+
+.bar > i {
+  display: block;
+  height: 100%;
+  background: var(--c-2);
+}
+
+.bar--lg { height: 12px; width: 88px; border-color: var(--c-0); }
+.bar--lg > i { background: var(--c-0); }
+
+/* 파랑의 종합 점수 — 5개와 다른 위계.
+   "평균/합계/총점" 라벨을 쓰지 않는다. */
+.verdict {
+  border-top: 1px solid var(--c-0);
+  border-left: 4px solid var(--c-0);
+  padding: var(--s-3);
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  min-width: 0;
+}
+
+.verdict__label { font-size: 11px; color: var(--c-2); }
+.verdict__score { font-family: var(--mono); font-size: 16px; font-weight: 600; }
+.verdict__max   { font-family: var(--mono); font-size: 11px; color: var(--c-2); }
+
+/* 파랑의 다음 모자 지명 */
+.pick {
+  border-top: 1px solid var(--c-4);
+  margin-top: var(--s-3);
+  padding-top: var(--s-3);
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+.pick__label { font-size: 11px; color: var(--c-2); flex: none; }
+
+/* 사용자 발언 (지나간 것) */
+.said {
+  border: 1px solid var(--c-3);
+  border-style: dashed;
+  padding: var(--s-3);
+  min-width: 0;
+}
+
+.said__label { font-size: 11px; color: var(--c-2); margin-bottom: var(--s-1); }
+
+/* 사용자 차례 */
+.turn {
+  border: 1px solid var(--c-0);
+  border-style: solid;
+  padding: var(--s-3);
+  min-width: 0;
+}
+
+.turn__label {
+  font-size: 11px;
+  color: var(--c-0);
+  font-weight: 600;
+  margin-bottom: var(--s-2);
+}
+
+/* 평가 매트릭스 (실험 B) */
+.matrix-wrap { overflow-x: auto; }
+
+.matrix {
+  border-collapse: collapse;
+  font-size: 12px;
+  min-width: 100%;
+}
+
+.matrix th,
+.matrix td {
+  border: 1px solid var(--c-4);
+  padding: var(--s-1) var(--s-2);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.matrix th { font-weight: 400; font-size: 11px; color: var(--c-2); }
+.matrix td:first-child,
+.matrix th:first-child { text-align: left; }
+.matrix .col-blue { border-left: 3px solid var(--c-0); border-right: 1px solid var(--c-0); }
+.matrix tr.is-now td { border-top: 2px solid var(--c-0); border-bottom: 2px solid var(--c-0); }
+
+/* 순위표 (실험 A) */
+.rank { display: flex; flex-direction: column; }
+
+.rank__item {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: var(--s-2) 0;
+  border-bottom: 1px solid var(--c-5);
+  min-width: 0;
+}
+
+.rank__no {
+  font-family: var(--mono);
+  font-size: 12px;
+  width: 16px;
+  flex: none;
+  color: var(--c-2);
+}
+
+.rank__item.is-now { border-bottom-color: var(--c-0); }
+
+/* ─── 사이드 노트 ──────────────────────────────────────── */
+
+.notes {
+  border: 1px solid var(--c-0);
+  padding: var(--s-4);
+  margin-top: var(--s-5);
+  font-size: 13px;
+}
+
+@media (min-width: 1024px) {
+  .notes { margin-top: 0; position: sticky; top: var(--s-4); }
+}
+
+.notes h3 {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--c-2);
+  border-bottom: 1px solid var(--c-4);
+  padding-bottom: var(--s-1);
+  margin: var(--s-4) 0 var(--s-2);
+}
+
+.notes h3:first-child { margin-top: 0; }
+.notes li { margin-bottom: var(--s-2); }
+
+/* ─── 4안 비교 ─────────────────────────────────────────── */
+
+.options { display: grid; gap: var(--s-5); }
+
+@media (min-width: 768px)  { .options { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1400px) { .options { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+.option { min-width: 0; }
+
+.option__head {
+  border: 1px solid var(--c-0);
+  border-bottom: 0;
+  padding: var(--s-3);
+  background: var(--c-5);
+}
+
+.option__kind {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--c-2);
+}
+
+.option__name { font-size: 15px; margin: var(--s-1) 0; }
+.option__concept { font-size: 12px; color: var(--c-1); }
+
+.option .frame { border-top: 1px solid var(--c-0); }
+
+.option__note {
+  border: 1px solid var(--c-4);
+  border-top: 0;
+  padding: var(--s-3);
+  font-size: 12px;
+}
+
+.option__note dt { color: var(--c-2); font-size: 11px; margin-top: var(--s-2); }
+.option__note dt:first-child { margin-top: 0; }
+.option__note dd { margin: 0 0 var(--s-1); }
+
+/* ─── 인덱스 ───────────────────────────────────────────── */
+
+.nav { display: grid; gap: var(--s-3); }
+
+@media (min-width: 768px) {
+  .nav { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+}
+
+.nav__item {
+  border: 1px solid var(--c-0);
+  padding: var(--s-3);
+  text-decoration: none;
+  display: block;
+}
+
+.nav__item--todo { border-style: dashed; border-color: var(--c-4); color: var(--c-3); }
+
+
+/* ─── 라운드 도메인 컴포넌트 (2026-08-03 추가) ─────────────
+   화면 위계 규칙(docs/screens/README.md)을 시각적으로 구현한다.
+   1순위 .learn > 2순위 .idea > 3순위 .sum > 4순위 .hat > 5순위 .fold  */
+
+/* 라운드 헤더 — 파랑이 선언한 이번 라운드의 목적 */
+.round {
+  border-left: 4px solid var(--c-0);
+  border-top: 1px solid var(--c-4);
+  border-right: 1px solid var(--c-4);
+  border-bottom: 1px solid var(--c-4);
+  padding: var(--s-2) var(--s-3);
+}
+.round__no { font-family: var(--mono); font-size: 11px; color: var(--c-2); }
+.round__goal { font-size: 14px; font-weight: 600; }
+.round__why { font-size: 12px; color: var(--c-1); margin-top: var(--s-1); }
+
+/* 위계 1순위 — 이번 라운드에 새로 알게 된 것. 화면에서 가장 강한 요소 */
+.learn { border: 2px solid var(--c-0); padding: var(--s-3); }
+.learn__label {
+  font-size: 11px; letter-spacing: 0.08em; color: var(--c-2);
+  border-bottom: 1px solid var(--c-4); padding-bottom: var(--s-1);
+  margin-bottom: var(--s-2);
+}
+.learn__item { display: flex; gap: var(--s-2); padding: var(--s-2) 0; border-bottom: 1px solid var(--c-5); }
+.learn__item:last-child { border-bottom: 0; }
+.learn__body { min-width: 0; }
+.learn__so { font-size: 12px; color: var(--c-1); margin-top: var(--s-1); }
+
+/* 위계 2순위 — 아이디어 한 줄. 상태를 보더/장식으로 구분한다 */
+.idea {
+  display: flex; align-items: center; gap: var(--s-2);
+  border: 1px solid var(--c-4); padding: var(--s-2) var(--s-3); min-width: 0;
+}
+.idea__name { font-size: 13px; font-weight: 600; white-space: nowrap; }
+.idea__desc { font-size: 12px; color: var(--c-2); min-width: 0; }
+.idea__tag { font-size: 11px; border: 1px solid var(--c-3); padding: 0 var(--s-1); white-space: nowrap; }
+.idea--up { border-color: var(--c-0); border-width: 2px; }
+.idea--out { border-style: dashed; color: var(--c-3); }
+.idea--out .idea__name { text-decoration: line-through; color: var(--c-3); }
+.idea--merged { border-style: dashed; }
+.idea--merged .idea__name { color: var(--c-2); }
+
+/* 위계 3순위 — 파랑의 정리. 산문 금지, 항목이 같은 자리에 온다 */
+.sum { border: 1px solid var(--c-0); border-left: 4px solid var(--c-0); padding: var(--s-3); }
+.sum__row { display: grid; gap: var(--s-1); padding: var(--s-2) 0; border-bottom: 1px solid var(--c-5); }
+.sum__row:last-child { border-bottom: 0; }
+.sum__k { font-size: 11px; color: var(--c-2); }
+.sum__v { font-size: 13px; }
+@media (min-width: 768px) {
+  .sum__row { grid-template-columns: 88px 1fr; gap: var(--s-3); align-items: baseline; }
+}
+
+/* 위계 5순위 — 점수. 기본 접힘. 접힌 상태에선 변화량만 보인다 */
+.fold { border: 1px solid var(--c-4); }
+.fold__head {
+  display: flex; align-items: center; gap: var(--s-2);
+  padding: var(--s-2) var(--s-3); background: var(--c-5); font-size: 12px;
+}
+.fold__caret { font-family: var(--mono); color: var(--c-2); }
+.fold__peek { font-family: var(--mono); font-size: 11px; color: var(--c-2); margin-left: auto; }
+.fold__body { padding: var(--s-3); border-top: 1px solid var(--c-4); }
+
+/* 사용자 개입 — 라운드 사이. 자유 입력 하나로 두지 않는다 */
+.act { border: 2px solid var(--c-0); padding: var(--s-3); }
+.act__label { font-size: 11px; color: var(--c-2); margin-bottom: var(--s-2); }
+.act__grid { display: grid; gap: var(--s-2); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.act__grid .btn { width: 100%; }
+
+/* 실험안용 — 아이디어 보드 / 집중 파기 */
+.board { display: grid; gap: var(--s-2); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.board__col-label { font-size: 11px; color: var(--c-2); }
+.lens { display: grid; gap: var(--s-2); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.lens__item { border: 1px solid var(--c-4); padding: var(--s-2); font-size: 12px; min-width: 0; }
+.lens__hat { font-size: 11px; color: var(--c-2); display: flex; align-items: center; gap: var(--s-1); }
+.focus { border: 2px solid var(--c-0); padding: var(--s-3); text-align: center; }
+.focus__name { font-size: 16px; font-weight: 600; }
+.focus__meta { font-size: 12px; color: var(--c-2); margin-top: var(--s-1); }
+
+
+/* ─── 메신저 (2026-08-03) ───────────────────────────────
+   토론은 단톡방이다. 모자는 참여자, 사용자도 참여자.
+   흑백이므로 말풍선 구분은 보더 스타일 + 아바타 스와치로 한다.   */
+
+.chat { display: flex; flex-direction: column; gap: var(--s-3); min-width: 0; }
+
+.msg { display: flex; gap: var(--s-2); align-items: flex-start; min-width: 0; }
+.msg__av { width: 26px; height: 26px; border: 1px solid var(--c-0); flex: none; }
+.msg__col { min-width: 0; max-width: 85%; }
+.msg__name { font-size: 11px; color: var(--c-2); margin-bottom: 2px; display: flex; gap: var(--s-1); align-items: baseline; }
+.msg__role { color: var(--c-3); }
+.msg__bubble {
+  border: 1px solid var(--c-4);
+  padding: var(--s-2) var(--s-3);
+  font-size: 13px;
+  min-width: 0;
+}
+.msg__bubble + .msg__bubble { margin-top: var(--s-1); }
+.msg__time { font-size: 10px; color: var(--c-3); align-self: flex-end; flex: none; }
+
+/* 모자별 말풍선 — hat--* 와 같은 보더 어휘를 쓴다 */
+.msg--white  .msg__bubble { border: 1px solid var(--c-4); }
+.msg--red    .msg__bubble { border: 1px dashed var(--c-2); }
+.msg--black  .msg__bubble { border: 2px solid var(--c-0); }
+.msg--yellow .msg__bubble { border: 1px dotted var(--c-2); }
+.msg--green  .msg__bubble { border: 3px double var(--c-2); }
+.msg--blue   .msg__bubble { border: 1px solid var(--c-4); border-left: 4px solid var(--c-0); }
+
+.msg--white  .msg__av { background: var(--c-6); }
+.msg--black  .msg__av { background: var(--c-0); }
+.msg--red    .msg__av { background: repeating-linear-gradient(45deg, var(--c-0) 0 1px, var(--c-6) 1px 4px); }
+.msg--yellow .msg__av { background: radial-gradient(var(--c-0) 0.8px, var(--c-6) 0.9px); background-size: 4px 4px; }
+.msg--green  .msg__av { background: repeating-linear-gradient(0deg, var(--c-0) 0 1px, var(--c-6) 1px 4px),
+                                    repeating-linear-gradient(90deg, var(--c-0) 0 1px, var(--c-6) 1px 4px); }
+.msg--blue   .msg__av { background: repeating-linear-gradient(0deg, var(--c-0) 0 1px, var(--c-6) 1px 4px); }
+
+/* 내 말풍선 — 오른쪽 정렬 */
+.msg--me { flex-direction: row-reverse; }
+.msg--me .msg__col { margin-left: auto; }
+.msg--me .msg__name { justify-content: flex-end; }
+.msg--me .msg__bubble { border: 1px solid var(--c-0); background: var(--c-5); }
+
+/* 카드형 첨부 — 파랑이 보내는 정리·점수. 말풍선 안에 블록이 들어간다 */
+.msg__bubble--card { padding: 0; border: 1px solid var(--c-0); }
+.msg__bubble--card > * { border: 0; }
+.msg__bubble--card .fold { border-top: 1px solid var(--c-4); }
+
+/* 시스템 줄 — 라운드 시작·종료 같은 사건 */
+.sysline { display: flex; align-items: center; gap: var(--s-2); font-size: 11px; color: var(--c-2); }
+.sysline::before, .sysline::after { content: ""; flex: 1; border-top: 1px solid var(--c-4); }
+.sysline--strong { color: var(--c-0); font-weight: 600; }
+.sysline--strong::before, .sysline--strong::after { border-top: 1px solid var(--c-0); }
+
+/* 입력 중 표시 */
+.typing { font-size: 12px; color: var(--c-3); display: flex; align-items: center; gap: var(--s-2); }
+
+/* 빠른 답장 — 개입 수단을 자유 입력 하나로 두지 않는다 */
+.quick { display: flex; gap: var(--s-2); flex-wrap: wrap; padding-top: var(--s-1); }
+
+/* 스레드 — 아이디어마다 대화가 갈라지는 실험안용 */
+.thread { border-left: 2px solid var(--c-4); margin-left: var(--s-5); padding-left: var(--s-3); }
+.thread__head { font-size: 11px; color: var(--c-2); margin-bottom: var(--s-2); }
+.thread__count { font-size: 11px; color: var(--c-2); border: 1px solid var(--c-4); padding: 0 var(--s-1); }
+
+/* 상단 고정 요약 — 스크롤해도 지금 상태가 안 사라진다 */
+.pin { border-bottom: 1px solid var(--c-0); background: var(--c-5); padding: var(--s-2) var(--s-3); font-size: 12px; }
+.pin__row { display: flex; align-items: center; gap: var(--s-2); }
