@@ -1,0 +1,382 @@
+<meta charset="utf-8">
+<title>I2 파랑의 확인 질문 — 4안</title>
+<link rel="stylesheet" href="wireframe.css">
+
+<div class="page">
+
+  <div class="meta">
+    <div class="meta__id">I2</div>
+    <div class="meta__title">파랑의 확인 질문 — 4안</div>
+    <div class="meta__purpose">주제의 모호한 지점을 되물어 확정한다. 여기서 잘못 좁히면 토론 전체가 어긋난다</div>
+    <div class="meta__grid">
+      <div class="meta__k">진입점</div>
+      <div class="meta__v">I1 주제 입력 (메신저에서는 같은 방의 첫 메시지)</div>
+      <div class="meta__k">다음</div>
+      <div class="meta__v">D1 라운드 1 자동 시작</div>
+      <div class="meta__k">범위</div>
+      <div class="meta__v">I1을 접어 넣었다. 별도 화면인지 한 화면인지는 확정 단계에서 가른다</div>
+      <div class="meta__k">왜 중요한가</div>
+      <div class="meta__v">스킬 규칙이 "건너뛰기 금지"로 못박은 유일한 관문. 실패 사례 — "스킨 만드는 웹페이지"를 마인크래프트 스킨으로 단정하고 끝까지 진행</div>
+      <div class="meta__k">데이터</div>
+      <div class="meta__v">검증 실행(2026-08-02) 실제 확인 질문 4개와 사용자 답</div>
+      <div class="meta__k">작성일</div>
+      <div class="meta__v">2026-08-03</div>
+    </div>
+  </div>
+
+  <div class="options">
+
+    <!-- ══════════ 보편 A ══════════ -->
+    <div class="option">
+      <div class="option__head">
+        <div class="option__kind">보편 A</div>
+        <div class="option__name">한 번에 하나</div>
+        <div class="option__concept">파랑이 질문을 하나씩 던지고 답을 받아 다음을 묻는다. 가장 대화다운 형태.</div>
+      </div>
+
+      <div class="frame frame--app">
+        <div class="frame__label">375 · 순차 질문</div>
+
+        <div class="topbar">
+          <div class="topbar__back">&lt;</div>
+          <div class="topbar__title">새 토론</div>
+          <div class="topbar__action">확인 2/4</div>
+        </div>
+
+        <div class="body">
+          <div class="chat">
+
+            <div class="msg msg--me">
+              <div class="msg__col">
+                <div class="msg__name">나</div>
+                <div class="msg__bubble">노션 벗어날 메모 앱 만들고 싶어</div>
+              </div>
+            </div>
+
+            <div class="msg msg--blue">
+              <div class="msg__av"></div>
+              <div class="msg__col">
+                <div class="msg__name">파랑 <span class="msg__role">진행·종합</span></div>
+                <div class="msg__bubble">네 갈래로 읽힙니다. 답에 따라 토론이 달라지는 것만 묻겠습니다</div>
+                <div class="msg__bubble">누가 씁니까</div>
+                <div class="quick">
+                  <div class="chip">나 혼자</div>
+                  <div class="chip">2~10명</div>
+                  <div class="chip">배포</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="msg msg--me">
+              <div class="msg__col">
+                <div class="msg__name">나</div>
+                <div class="msg__bubble">2~10명</div>
+              </div>
+            </div>
+
+            <div class="msg msg--blue">
+              <div class="msg__av"></div>
+              <div class="msg__col">
+                <div class="msg__name">파랑</div>
+                <div class="msg__bubble">노션을 왜 떠납니까</div>
+                <div class="quick">
+                  <div class="chip">무겁다</div>
+                  <div class="chip is-on">데이터가 갇힘</div>
+                  <div class="chip">비용</div>
+                  <div class="chip">오프라인</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="typing">대기</div>
+
+          </div>
+        </div>
+
+        <div class="bottombar">
+          <div class="input">직접 입력</div>
+          <div class="btn btn--primary btn--sm">보내기</div>
+        </div>
+      </div>
+
+      <dl class="option__note">
+        <dt>의도</dt>
+        <dd>메신저의 기본 리듬. 답을 보고 다음 질문을 고를 수 있어 불필요한 질문이 준다. 상단 <span class="token">확인 2/4</span> 로 끝이 보인다.</dd>
+        <dt>대안</dt>
+        <dd>선택지를 칩으로 주되 하단 입력으로 직접 답할 수도 있게 열어뒀다. 규칙상 "알아서 해"도 허용해야 한다.</dd>
+        <dt>미정</dt>
+        <dd>질문이 4개면 왕복이 8번이다. 시작이 길다고 느껴지면 토론에 들어가기도 전에 이탈한다.</dd>
+      </dl>
+    </div>
+
+    <!-- ══════════ 보편 B ══════════ -->
+    <div class="option">
+      <div class="option__head">
+        <div class="option__kind">보편 B</div>
+        <div class="option__name">한 장으로</div>
+        <div class="option__concept">파랑이 질문 넷을 카드 하나로 보낸다. 사용자가 훑어보고 한 번에 답한다.</div>
+      </div>
+
+      <div class="frame frame--app">
+        <div class="frame__label">375 · 일괄 질문</div>
+
+        <div class="topbar">
+          <div class="topbar__back">&lt;</div>
+          <div class="topbar__title">새 토론</div>
+          <div class="topbar__action">확인</div>
+        </div>
+
+        <div class="body">
+          <div class="chat">
+
+            <div class="msg msg--me">
+              <div class="msg__col">
+                <div class="msg__name">나</div>
+                <div class="msg__bubble">노션 벗어날 메모 앱 만들고 싶어</div>
+              </div>
+            </div>
+
+            <div class="msg msg--blue">
+              <div class="msg__av"></div>
+              <div class="msg__col">
+                <div class="msg__name">파랑 <span class="msg__role">진행·종합</span></div>
+                <div class="msg__bubble">답에 따라 토론이 갈리는 것만 넷 묻습니다</div>
+
+                <div class="msg__bubble msg__bubble--card">
+                  <div class="stack stack--tight" style="padding:12px">
+                    <div>
+                      <div class="small muted">누가 쓰나</div>
+                      <div class="chips"><span class="chip">혼자</span><span class="chip is-on">2~10명</span><span class="chip">배포</span></div>
+                    </div>
+                    <div class="divider"></div>
+                    <div>
+                      <div class="small muted">떠나는 이유</div>
+                      <div class="chips"><span class="chip">무겁다</span><span class="chip is-on">갇힘</span><span class="chip">비용</span></div>
+                    </div>
+                    <div class="divider"></div>
+                    <div>
+                      <div class="small muted">어디까지 대체</div>
+                      <div class="chips"><span class="chip">메모만</span><span class="chip is-on">메모+구조화</span><span class="chip">전체</span></div>
+                    </div>
+                    <div class="divider"></div>
+                    <div>
+                      <div class="small muted">만든다가 전제인가</div>
+                      <div class="chips"><span class="chip is-on">직접 만듦</span><span class="chip">이주도 후보</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="quick">
+                  <div class="chip is-on">답 보내기</div>
+                  <div class="chip">알아서 해</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="bottombar">
+          <div class="input">덧붙일 말</div>
+          <div class="btn btn--primary btn--sm">보내기</div>
+        </div>
+      </div>
+
+      <dl class="option__note">
+        <dt>의도</dt>
+        <dd>순차 질문의 왕복 비용을 없앤다. 넷을 한눈에 보면 "이 토론이 무엇을 갈라 보려는지"가 먼저 이해된다.</dd>
+        <dt>대안</dt>
+        <dd>「알아서 해」를 같은 자리에 뒀다. 규칙상 이 경우 파랑이 세운 가정을 명시해야 하므로 다음 말풍선이 가정 목록이 된다.</dd>
+        <dt>미정</dt>
+        <dd>답을 다 채우기 전에는 무엇이 남았는지 카드 안에서만 보인다. 미응답 표시를 어떻게 할지.</dd>
+      </dl>
+    </div>
+
+    <!-- ══════════ 실험 A ══════════ -->
+    <div class="option">
+      <div class="option__head">
+        <div class="option__kind">실험 A</div>
+        <div class="option__name">모자들이 각자 묻는다</div>
+        <div class="option__concept">파랑만 묻지 않는다. 다섯 모자가 자기 관점에서 알아야 할 것을 직접 묻는다.</div>
+      </div>
+
+      <div class="frame frame--app">
+        <div class="frame__label">375 · 다중 질문자</div>
+
+        <div class="topbar">
+          <div class="topbar__back">&lt;</div>
+          <div class="topbar__title">새 토론</div>
+          <div class="topbar__action">확인</div>
+        </div>
+
+        <div class="body">
+          <div class="chat">
+
+            <div class="msg msg--me">
+              <div class="msg__col">
+                <div class="msg__name">나</div>
+                <div class="msg__bubble">노션 벗어날 메모 앱 만들고 싶어</div>
+              </div>
+            </div>
+
+            <div class="sysline">확인 질문</div>
+
+            <div class="msg msg--white">
+              <div class="msg__av"></div>
+              <div class="msg__col">
+                <div class="msg__name">하양 <span class="msg__role">사실·정보</span></div>
+                <div class="msg__bubble">지금 노션에 쌓인 문서가 몇 개입니까</div>
+                <div class="small muted">검색으로 못 아는 것만 묻습니다</div>
+              </div>
+            </div>
+
+            <div class="msg msg--red">
+              <div class="msg__av"></div>
+              <div class="msg__col">
+                <div class="msg__name">빨강 <span class="msg__role">감정·직관</span></div>
+                <div class="msg__bubble">노션의 어떤 순간이 제일 싫었습니까</div>
+              </div>
+            </div>
+
+            <div class="msg msg--black">
+              <div class="msg__av"></div>
+              <div class="msg__col">
+                <div class="msg__name">검정 <span class="msg__role">위험·비판</span></div>
+                <div class="msg__bubble">같이 쓸 사람 중에 개발자가 아닌 사람이 있습니까</div>
+              </div>
+            </div>
+
+            <div class="msg msg--green">
+              <div class="msg__av"></div>
+              <div class="msg__col">
+                <div class="msg__name">초록 <span class="msg__role">창의·대안</span></div>
+                <div class="msg__bubble">건드리면 안 되는 전제가 있습니까</div>
+              </div>
+            </div>
+
+            <div class="msg msg--me">
+              <div class="msg__col">
+                <div class="msg__name">나</div>
+                <div class="msg__bubble">2~10명이고 개발자 아닌 사람 있음</div>
+              </div>
+            </div>
+
+            <div class="msg msg--blue">
+              <div class="msg__av"></div>
+              <div class="msg__col">
+                <div class="msg__name">파랑</div>
+                <div class="msg__bubble">남은 답 없이도 시작할 수 있습니다. 가정을 적고 엽니다</div>
+                <div class="quick">
+                  <div class="chip is-on">시작</div>
+                  <div class="chip">더 답하기</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="bottombar">
+          <div class="input">답하기</div>
+          <div class="btn btn--primary btn--sm">보내기</div>
+        </div>
+      </div>
+
+      <dl class="option__note">
+        <dt>의도</dt>
+        <dd>도메인 규칙에 이미 모자별 확인 질의가 정의돼 있다 — 하양은 보유 데이터, 검정은 제약, 초록은 건드리면 안 되는 전제, 노랑은 가용 자원, 빨강은 동기. 파랑이 대신 물으면 그 차이가 화면에서 사라진다. 첫 화면부터 6모자를 쓴다는 것이 드러난다.</dd>
+        <dt>대안</dt>
+        <dd>다섯이 다 묻지 않고 주제에 따라 둘셋만 묻게 했다. 다섯이 동시에 물으면 인터뷰가 된다.</dd>
+        <dt>미정</dt>
+        <dd>답을 다 안 해도 시작할 수 있어야 하는데, 어느 질문이 필수인지 화면에서 구별이 안 된다.</dd>
+      </dl>
+    </div>
+
+    <!-- ══════════ 실험 B ══════════ -->
+    <div class="option">
+      <div class="option__head">
+        <div class="option__kind">실험 B</div>
+        <div class="option__name">오해 먼저 보여주기</div>
+        <div class="option__concept">묻지 않는다. 파랑이 이해한 주제를 먼저 써서 보여주고 사용자가 틀린 데를 고친다.</div>
+      </div>
+
+      <div class="frame frame--app">
+        <div class="frame__label">375 · 초안 교정</div>
+
+        <div class="topbar">
+          <div class="topbar__back">&lt;</div>
+          <div class="topbar__title">새 토론</div>
+          <div class="topbar__action">주제 확정</div>
+        </div>
+
+        <div class="body">
+          <div class="chat">
+
+            <div class="msg msg--me">
+              <div class="msg__col">
+                <div class="msg__name">나</div>
+                <div class="msg__bubble">노션 벗어날 메모 앱 만들고 싶어</div>
+              </div>
+            </div>
+
+            <div class="msg msg--blue">
+              <div class="msg__av"></div>
+              <div class="msg__col">
+                <div class="msg__name">파랑 <span class="msg__role">진행·종합</span></div>
+                <div class="msg__bubble">이렇게 이해했습니다. 틀린 데를 눌러 고쳐주십시오</div>
+
+                <div class="msg__bubble msg__bubble--card">
+                  <div style="padding:12px;font-size:13px;line-height:1.7">
+                    <span class="chip">혼자 쓸</span> 메모 도구를
+                    <span class="chip">직접 만든다</span>.
+                    노션을 떠나는 이유는
+                    <span class="chip">무겁고 느려서</span>이고,
+                    대체 범위는
+                    <span class="chip">단순 메모</span>까지다.
+                  </div>
+                </div>
+
+                <div class="msg__bubble">이대로면 속도 위주로 토론이 갑니다</div>
+                <div class="quick">
+                  <div class="chip is-on">맞음 · 시작</div>
+                  <div class="chip">고칠 데 있음</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="msg msg--me">
+              <div class="msg__col">
+                <div class="msg__name">나</div>
+                <div class="msg__bubble">혼자 아니고 2~10명. 이유는 속도 아니라 데이터가 갇혀서</div>
+              </div>
+            </div>
+
+            <div class="msg msg--blue">
+              <div class="msg__av"></div>
+              <div class="msg__col">
+                <div class="msg__name">파랑</div>
+                <div class="msg__bubble">방향이 바뀝니다. 속도는 탈락 사유에서 빠지고 충돌 문제가 들어옵니다</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="bottombar">
+          <div class="input">고칠 데</div>
+          <div class="btn btn--primary btn--sm">보내기</div>
+        </div>
+      </div>
+
+      <dl class="option__note">
+        <dt>의도</dt>
+        <dd>실제 실패는 "안 물어봐서"가 아니라 "잘못 좁혀서"였다. 질문은 사용자가 무엇이 중요한지 이미 안다고 전제하지만, 오해를 먼저 보여주면 <b>틀린 것을 알아보는 것만으로</b> 교정된다. 고르는 것보다 반박이 쉽다.</dd>
+        <dt>대안</dt>
+        <dd>초안의 가정마다 칩을 박아 눌러서 고치게 했다. 문장을 통째로 다시 쓰게 하면 부담이 크다.</dd>
+        <dt>미정</dt>
+        <dd>파랑이 처음부터 그럴듯하게 쓰면 사용자가 그냥 넘길 위험이 있다. 일부러 틀리게 쓸 수는 없으므로, 확신이 낮은 칸을 표시해야 할 수도 있다.</dd>
+      </dl>
+    </div>
+
+  </div>
+</div>
