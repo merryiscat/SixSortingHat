@@ -1,0 +1,338 @@
+<meta charset="utf-8">
+<title>R1 최종 보고서 — 4안</title>
+<link rel="stylesheet" href="wireframe.css">
+
+<div class="page">
+
+  <div class="meta">
+    <div class="meta__id">R1</div>
+    <div class="meta__title">최종 보고서 — 4안</div>
+    <div class="meta__purpose">토론 전체를 종합해 사용자가 들고 나갈 결과물을 만든다</div>
+    <div class="meta__grid">
+      <div class="meta__k">진입점</div>
+      <div class="meta__v">D1에서 파랑이 종료를 제안하고 사용자가 승인 · 최대 6라운드 도달</div>
+      <div class="meta__k">다음</div>
+      <div class="meta__v">I1 목록으로 (완료 표시) · 내보내기</div>
+      <div class="meta__k">원천</div>
+      <div class="meta__v">6장 구조는 <span class="token">.claude/skills/six-hats/report.md</span> 가 권위</div>
+      <div class="meta__k">쟁점</div>
+      <div class="meta__v">긴 문서를 말풍선으로 주면 어색하고, 별도 화면으로 빼면 대화 흐름이 끊긴다</div>
+      <div class="meta__k">데이터</div>
+      <div class="meta__v">검증 실행(2026-08-02, 탈노션 메모 앱)의 실제 계보</div>
+      <div class="meta__k">작성일</div>
+      <div class="meta__v">2026-08-03</div>
+    </div>
+  </div>
+
+  <div class="options">
+
+    <!-- ══════════ 보편 A ══════════ -->
+    <div class="option">
+      <div class="option__head">
+        <div class="option__kind">보편 A</div>
+        <div class="option__name">파랑이 순차 발송</div>
+        <div class="option__concept">보고서 6장을 카드 말풍선으로 하나씩 보낸다. 방을 안 떠난다.</div>
+      </div>
+
+      <div class="frame frame--app">
+        <div class="frame__label">375 · 순차 발송</div>
+
+        <div class="topbar">
+          <div class="topbar__back">&lt;</div>
+          <div class="topbar__title">탈노션 메모 앱</div>
+          <div class="topbar__action">완료</div>
+        </div>
+
+        <div class="body">
+          <div class="chat">
+
+            <div class="sysline sysline--strong">토론 종료 · 5라운드</div>
+
+            <div class="msg msg--blue">
+              <div class="msg__av"></div>
+              <div class="msg__col">
+                <div class="msg__name">파랑 <span class="msg__role">진행·종합</span></div>
+                <div class="msg__bubble">보고서를 정리했습니다. 6장입니다</div>
+
+                <div class="msg__bubble msg__bubble--card">
+                  <div style="padding:12px">
+                    <div class="small muted">1 · 주제의 여정</div>
+                    <div style="margin-top:6px">"노션 벗어날 메모 앱"에서 출발해 <b>2~10명 팀 · 데이터 소유권 · 속성까지 대체</b>로 좁혀졌다. 속도·비용은 확인 질문에서 배제됐다</div>
+                  </div>
+                </div>
+
+                <div class="msg__bubble msg__bubble--card">
+                  <div style="padding:12px">
+                    <div class="small muted">2 · 아이디어 계보</div>
+                    <div class="stack stack--tight" style="margin-top:8px">
+                      <div class="idea idea--up"><div class="idea__name">인덱스</div><div class="idea__desc grow">R3에서 결정 3개</div></div>
+                      <div class="idea idea--merged"><div class="idea__name">구독</div><div class="idea__desc grow">→ 인덱스</div></div>
+                      <div class="idea idea--out"><div class="idea__name">미러</div><div class="idea__desc grow">R3 탈락</div></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="status">3장부터 4개 더</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="bottombar">
+          <div class="btn btn--ghost btn--sm">내보내기</div>
+          <div class="grow"></div>
+          <div class="btn btn--sm">새 토론</div>
+        </div>
+      </div>
+
+      <dl class="option__note">
+        <dt>의도</dt>
+        <dd>D1과 완전히 같은 방, 같은 말풍선 어휘. 토론이 끝났다고 다른 세계로 가지 않는다. 장마다 카드가 하나라 스크롤로 읽힌다.</dd>
+        <dt>대안</dt>
+        <dd>6장을 한 카드에 넣는 안 — 카드가 화면 다섯 개 길이가 되어 폐기.</dd>
+        <dt>미정</dt>
+        <dd>보고서는 나중에 다시 볼 것인데, 대화 스크롤 안에 묻힌다. 재방문 시 어디서 찾을지.</dd>
+      </dl>
+    </div>
+
+    <!-- ══════════ 보편 B ══════════ -->
+    <div class="option">
+      <div class="option__head">
+        <div class="option__kind">보편 B</div>
+        <div class="option__name">문서로 빼기</div>
+        <div class="option__concept">방에는 링크 카드만. 보고서는 문서 화면에서 문서답게 읽는다.</div>
+      </div>
+
+      <div class="frame frame--app">
+        <div class="frame__label">375 · 문서 화면</div>
+
+        <div class="topbar">
+          <div class="topbar__back">&lt;</div>
+          <div class="topbar__title">보고서</div>
+          <div class="topbar__action">내보내기</div>
+        </div>
+
+        <div class="body">
+          <div class="stack">
+
+            <div>
+              <h1 style="font-size:18px">탈노션 메모 앱</h1>
+              <div class="small muted">5라운드 · 씨앗 5 · 최종 2 · 2026-08-02</div>
+            </div>
+
+            <div class="chips chips--scroll">
+              <span class="chip is-on">여정</span>
+              <span class="chip">계보</span>
+              <span class="chip">최종안</span>
+              <span class="chip">기여</span>
+              <span class="chip">위험</span>
+              <span class="chip">다음</span>
+            </div>
+
+            <div class="divider"></div>
+
+            <div>
+              <div class="small muted">3 · 최종안</div>
+              <h3 style="margin:6px 0">인덱스</h3>
+              <div style="font-size:13px;line-height:1.7">원본은 Markdown + 프론트매터, 조회는 로컬 SQLite. 뷰는 쿼리를 담은 노트로 저장한다. 본문은 파일 단위 소유자, 속성은 키 단위 마지막 쓰기 승.</div>
+              <div class="matrix-wrap" style="margin-top:10px">
+                <table class="matrix">
+                  <tr><th>근거</th><th>실행</th><th>위험</th><th>적합</th><th>독창</th><th>호응</th><th>합계</th></tr>
+                  <tr class="is-now"><td>9</td><td>8</td><td>7</td><td>9</td><td>7</td><td>8</td><td><b>8.10</b></td></tr>
+                </table>
+              </div>
+              <div class="small muted" style="margin-top:6px">라운드 5 시점</div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div>
+              <div class="small muted">5 · 위험과 남은 약점</div>
+              <div class="learn__item"><div class="n">·</div><div class="learn__body">쿼리 문법이 다음 락인이 된다</div></div>
+              <div class="learn__item"><div class="n">·</div><div class="learn__body">인덱스가 조용히 틀리면 사용자가 오판한다</div></div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="bottombar">
+          <div class="btn btn--ghost btn--sm">대화로</div>
+          <div class="grow"></div>
+          <div class="btn btn--primary btn--sm">저장</div>
+        </div>
+      </div>
+
+      <dl class="option__note">
+        <dt>의도</dt>
+        <dd>보고서는 다시 읽고 남에게 보여주는 물건이다. 말풍선은 훑기에 나쁘다. 상단 장 칩으로 6장을 건너뛰며 읽는다. 점수는 최종안에서만 표로 노출한다 — 결과물에서는 근거로서 값이 있다.</dd>
+        <dt>대안</dt>
+        <dd>방에는 링크 카드만 남기고 [대화로] 로 돌아간다. 흐름이 끊기는 대신 문서가 문서다워진다.</dd>
+        <dt>미정</dt>
+        <dd>메신저 규약을 벗어나는 유일한 화면이 된다. 이 예외를 허용할지.</dd>
+      </dl>
+    </div>
+
+    <!-- ══════════ 실험 A ══════════ -->
+    <div class="option">
+      <div class="option__head">
+        <div class="option__kind">실험 A</div>
+        <div class="option__name">여섯이 각자 쓴다</div>
+        <div class="option__concept">파랑이 대표로 정리하지 않는다. 각 모자가 자기 관점의 장을 직접 보낸다.</div>
+      </div>
+
+      <div class="frame frame--app">
+        <div class="frame__label">375 · 공동 집필</div>
+
+        <div class="topbar">
+          <div class="topbar__back">&lt;</div>
+          <div class="topbar__title">탈노션 메모 앱</div>
+          <div class="topbar__action">완료</div>
+        </div>
+
+        <div class="body">
+          <div class="chat">
+
+            <div class="sysline sysline--strong">보고서</div>
+
+            <div class="msg msg--blue">
+              <div class="msg__av"></div>
+              <div class="msg__col">
+                <div class="msg__name">파랑</div>
+                <div class="msg__bubble">남은 것은 <b>인덱스</b> 하나입니다. 각자 마지막으로 한마디씩</div>
+              </div>
+            </div>
+
+            <div class="msg msg--white">
+              <div class="msg__av"></div>
+              <div class="msg__col">
+                <div class="msg__name">하양 <span class="msg__role">사실·정보</span></div>
+                <div class="msg__bubble">확인된 사실 3건이 이 안을 받칩니다. 확인 못 한 것 1건 — 구독 모델의 팀 수용 사례</div>
+              </div>
+            </div>
+
+            <div class="msg msg--black">
+              <div class="msg__av"></div>
+              <div class="msg__col">
+                <div class="msg__name">검정 <span class="msg__role">위험·비판</span></div>
+                <div class="msg__bubble">남은 급소 둘. 쿼리 문법 락인, 그리고 조용히 틀리는 인덱스</div>
+                <div class="msg__bubble">탈락한 「동기화얹기」가 피하던 위험을 이 안은 안고 갑니다</div>
+              </div>
+            </div>
+
+            <div class="msg msg--green">
+              <div class="msg__av"></div>
+              <div class="msg__col">
+                <div class="msg__name">초록 <span class="msg__role">창의·대안</span></div>
+                <div class="msg__bubble">가장 값진 건 「구독」에서 가져온 소유자 개념입니다. 탈락한 안이 최종안에 남았습니다</div>
+              </div>
+            </div>
+
+            <div class="msg msg--yellow">
+              <div class="msg__av"></div>
+              <div class="msg__col">
+                <div class="msg__name">노랑 <span class="msg__role">이점·기회</span></div>
+                <div class="msg__bubble">첫 걸음은 앱 삭제 테스트 4항목을 문서로 적는 것입니다</div>
+              </div>
+            </div>
+
+            <div class="status">빨강 · 파랑 종합 2개 더</div>
+
+          </div>
+        </div>
+
+        <div class="bottombar">
+          <div class="btn btn--ghost btn--sm">내보내기</div>
+          <div class="grow"></div>
+          <div class="btn btn--sm">새 토론</div>
+        </div>
+      </div>
+
+      <dl class="option__note">
+        <dt>의도</dt>
+        <dd>report.md가 "여섯 모자와 파랑이 함께 쓴다"고 규정한 것을 문자 그대로 구현한다. 4장 「관점별 기여」를 파랑이 요약하면 그 순간 관점 차이가 한 목소리로 뭉개진다. 각자 말하면 기여가 증명된다.</dd>
+        <dt>대안</dt>
+        <dd>장 번호를 없애고 모자 이름으로 대체했다. 6장 구조는 유지하되 화면에서는 발언자로 보인다.</dd>
+        <dt>미정</dt>
+        <dd>1장 여정·2장 계보는 특정 모자의 것이 아니다. 파랑이 맡되 분량이 커진다.</dd>
+      </dl>
+    </div>
+
+    <!-- ══════════ 실험 B ══════════ -->
+    <div class="option">
+      <div class="option__head">
+        <div class="option__kind">실험 B</div>
+        <div class="option__name">궤적</div>
+        <div class="option__concept">최종안이 아니라 계보가 주인공. 어떻게 여기까지 왔는지를 먼저 본다.</div>
+      </div>
+
+      <div class="frame frame--app">
+        <div class="frame__label">375 · 궤적</div>
+
+        <div class="topbar">
+          <div class="topbar__back">&lt;</div>
+          <div class="topbar__title">탈노션 메모 앱</div>
+          <div class="topbar__action">5라운드</div>
+        </div>
+
+        <div class="body">
+          <div class="stack stack--tight">
+
+            <div class="sysline">R1 씨앗 5</div>
+            <div class="row" style="flex-wrap:wrap">
+              <span class="idea__tag">인덱스</span>
+              <span class="idea__tag">Git</span>
+              <span class="idea__tag">규약</span>
+              <span class="idea__tag">동기화얹기</span>
+              <span class="idea__tag">서랍</span>
+            </div>
+            <div class="card card--tight small">
+              <b>서랍</b> 탈락 — 아이디어가 아니라 요구사항이었다
+              <div class="muted">R3에서 「앱 삭제 테스트」로 되살아남</div>
+            </div>
+
+            <div class="sysline">R2 추가 2</div>
+            <div class="card card--tight small">
+              <b>미러</b> 투입 → R3 탈락. 사실이 지지하지 않는 길임을 확인
+              <div class="muted">닫은 것도 소득</div>
+            </div>
+
+            <div class="sysline">R3 확장</div>
+            <div class="learn">
+              <div class="learn__label">여기서 방향이 바뀌었다</div>
+              <div class="learn__item"><div class="n">·</div><div class="learn__body">뷰는 파일에 안 담긴다</div></div>
+              <div class="learn__item"><div class="n">·</div><div class="learn__body">흔한 충돌은 속성, 본문이 아니다
+                <div class="learn__so">앞 두 라운드를 틀린 문제에 썼다</div></div></div>
+            </div>
+
+            <div class="sysline sysline--strong">최종 · 인덱스</div>
+            <div class="card">
+              <div class="small">평문 원본 + SQLite 인덱스 + 뷰=노트 + 본문·속성 분리</div>
+              <div class="pick">
+                <div class="pick__label">검증</div>
+                <div class="small">앱 삭제 테스트 4항목</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="bottombar">
+          <div class="btn btn--ghost btn--sm">내보내기</div>
+          <div class="grow"></div>
+          <div class="btn btn--sm">새 토론</div>
+        </div>
+      </div>
+
+      <dl class="option__note">
+        <dt>의도</dt>
+        <dd>사용자가 이 서비스에서 원한 것은 답이 아니라 <b>확장 과정</b>이었다 ("아이디어 확장 과정을 보고 더 깊은 결과를 얻는지가 중요"). 최종안만 주면 검색으로도 나올 답과 구별이 안 된다. 무엇이 왜 죽었고 어디서 방향이 꺾였는지가 값이다.</dd>
+        <dt>대안</dt>
+        <dd>탈락 카드에 "무엇으로 되살아났는지"를 붙였다 — 탈락이 낭비가 아니었음을 보이는 자리.</dd>
+        <dt>미정</dt>
+        <dd>최종안이 맨 아래라 "그래서 뭘 하면 되는데"가 늦게 나온다. 6장 중 3·6장(최종안·다음 단계)의 자리가 약하다.</dd>
+      </dl>
+    </div>
+
+  </div>
+</div>
