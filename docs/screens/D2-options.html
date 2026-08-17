@@ -1,0 +1,297 @@
+<meta charset="utf-8">
+<title>D2 개입 상세 — 4안</title>
+<link rel="stylesheet" href="wireframe.css">
+
+<div class="page">
+
+  <div class="meta">
+    <div class="meta__id">D2</div>
+    <div class="meta__title">개입 상세 — 4안</div>
+    <div class="meta__purpose">라운드 종료 시 방향(더 파기·새 아이디어·정리·공격)과 대상(어느 아이디어)을 받아 파랑에게 넘긴다</div>
+    <div class="meta__grid">
+      <div class="meta__k">진입점</div>
+      <div class="meta__v">D1 라운드 종료 카드에서 「계속」 이외의 개입을 고를 때</div>
+      <div class="meta__k">다음</div>
+      <div class="meta__v">D1 다음 라운드 (파랑이 개입을 라운드 설계에 반영)</div>
+      <div class="meta__k">제약</div>
+      <div class="meta__v">화면 전환은 I1에서만 — D2는 별도 화면이 아니라 같은 방 안의 인라인·시트·카드다. ID만 따로 가진다</div>
+      <div class="meta__k">규칙</div>
+      <div class="meta__v">개입은 매겨진 점수를 바꾸지 않는다. 다음 라운드 설계에만 반영된다. 「모자 지목」은 제거됨 (2026-08-04)</div>
+      <div class="meta__k">왜 중요한가</div>
+      <div class="meta__v">스킬 검증에서 좋은 라운드는 전부 사용자 개입 뒤에 나왔다. 개입이 어려우면 이 서비스의 값이 사라진다</div>
+      <div class="meta__k">작성일</div>
+      <div class="meta__v">2026-08-15</div>
+    </div>
+  </div>
+
+  <div class="options">
+
+    <!-- ══════════ 보편 A ══════════ -->
+    <div class="option">
+      <div class="option__head">
+        <div class="option__kind">보편 A</div>
+        <div class="option__name">이어지는 칩</div>
+        <div class="option__concept">방향 칩을 탭하면 대상 칩이 이어서 나타난다. 대화 흐름 안에서 두 번의 탭으로 끝.</div>
+      </div>
+
+      <div class="frame frame--app">
+        <div class="frame__label">375 · 방향 → 대상</div>
+
+        <div class="topbar">
+          <div class="topbar__back">&lt;</div>
+          <div class="topbar__title">탈노션 메모 앱</div>
+          <div class="topbar__action">R3 완료</div>
+        </div>
+
+        <div class="body">
+          <div class="chat">
+
+            <div class="msg msg--blue">
+              <div class="msg__av"></div>
+              <div class="msg__col">
+                <div class="msg__name">파랑 <span class="msg__role">진행·종합</span></div>
+                <div class="msg__bubble">다음은 검증을 제안합니다</div>
+                <div class="quick">
+                  <div class="chip">계속</div>
+                  <div class="chip is-on">더 파기</div>
+                  <div class="chip">새 아이디어</div>
+                  <div class="chip">정리</div>
+                  <div class="chip">종료</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="msg msg--blue">
+              <div class="msg__av"></div>
+              <div class="msg__col">
+                <div class="msg__name">파랑</div>
+                <div class="msg__bubble">무엇을 팝니까</div>
+                <div class="quick">
+                  <div class="chip">인덱스</div>
+                  <div class="chip">규약</div>
+                  <div class="chip">동기화얹기</div>
+                  <div class="chip">Git</div>
+                  <div class="chip">전부</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="typing">대기</div>
+
+          </div>
+        </div>
+
+        <div class="bottombar">
+          <div class="input">조건 덧붙이기</div>
+          <div class="btn btn--primary btn--sm">보내기</div>
+        </div>
+      </div>
+
+      <dl class="option__note">
+        <dt>의도</dt>
+        <dd>메신저 quick-reply의 자연 연장. 새 컴포넌트가 없고, 개입이 대화 기록으로 그대로 남는다.</dd>
+        <dt>대안</dt>
+        <dd>대상 질문은 방향에 따라 달라진다 — 「새 아이디어」면 대상을 묻지 않고 빈 곳(어느 축이 약한가)을 제안한다.</dd>
+        <dt>미정</dt>
+        <dd>방향과 대상에 조건까지 붙이면 왕복 3번. 긴 개입은 자유 입력이 더 빠를 수 있다.</dd>
+      </dl>
+    </div>
+
+    <!-- ══════════ 보편 B ══════════ -->
+    <div class="option">
+      <div class="option__head">
+        <div class="option__kind">보편 B</div>
+        <div class="option__name">개입 시트</div>
+        <div class="option__concept">입력창 위로 시트가 올라온다. 방향 × 대상 × 한 줄 조건을 한 화면에서 채우고 한 번에 보낸다.</div>
+      </div>
+
+      <div class="frame frame--app">
+        <div class="frame__label">375 · 바텀 시트</div>
+
+        <div class="topbar">
+          <div class="topbar__back">&lt;</div>
+          <div class="topbar__title">탈노션 메모 앱</div>
+          <div class="topbar__action">R3 완료</div>
+        </div>
+
+        <div class="body">
+          <div class="chat">
+            <div class="msg msg--blue">
+              <div class="msg__av"></div>
+              <div class="msg__col">
+                <div class="msg__name">파랑</div>
+                <div class="msg__bubble">다음은 검증을 제안합니다</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grow"></div>
+
+          <!-- 시트 -->
+          <div style="border:1px solid #000;padding:12px;display:flex;flex-direction:column;gap:10px">
+            <div class="row row--between">
+              <b>개입</b>
+              <span class="small muted">닫기</span>
+            </div>
+            <div>
+              <div class="small muted" style="margin-bottom:4px">방향</div>
+              <div class="chips">
+                <span class="chip is-on">더 파기</span>
+                <span class="chip">새 아이디어</span>
+                <span class="chip">정리</span>
+                <span class="chip">공격</span>
+              </div>
+            </div>
+            <div>
+              <div class="small muted" style="margin-bottom:4px">대상</div>
+              <div class="chips">
+                <span class="chip is-on">인덱스</span>
+                <span class="chip">규약</span>
+                <span class="chip">동기화얹기</span>
+                <span class="chip">Git</span>
+              </div>
+            </div>
+            <div class="input">조건 한 줄 (선택)</div>
+            <div class="btn btn--primary btn--block">파랑에게 보내기</div>
+          </div>
+        </div>
+      </div>
+
+      <dl class="option__note">
+        <dt>의도</dt>
+        <dd>왕복이 한 번이다. 방향·대상·조건이 한 시야에 있어 개입 전체를 설계하고 보낸다.</dd>
+        <dt>대안</dt>
+        <dd>보낸 결과는 내 말풍선 한 줄("더 파기 · 인덱스 · 오프라인 우선")로 대화에 남긴다.</dd>
+        <dt>미정</dt>
+        <dd>시트가 대화를 가린다. 개입하려고 연 순간 마지막 발언을 다시 못 본다.</dd>
+      </dl>
+    </div>
+
+    <!-- ══════════ 실험 A ══════════ -->
+    <div class="option">
+      <div class="option__head">
+        <div class="option__kind">실험 A</div>
+        <div class="option__name">말하면 파랑이 해석</div>
+        <div class="option__concept">구조화 UI를 버린다. 자유 발언을 파랑이 해석해 구조화 확인 카드로 되돌려주고, 승인하면 반영.</div>
+      </div>
+
+      <div class="frame frame--app">
+        <div class="frame__label">375 · 해석 확인</div>
+
+        <div class="topbar">
+          <div class="topbar__back">&lt;</div>
+          <div class="topbar__title">탈노션 메모 앱</div>
+          <div class="topbar__action">R3 완료</div>
+        </div>
+
+        <div class="body">
+          <div class="chat">
+
+            <div class="msg msg--me">
+              <div class="msg__col">
+                <div class="msg__name">나</div>
+                <div class="msg__bubble">인덱스 좋긴 한데 오프라인일 때 어떻게 되는지 아무도 말 안 했잖아</div>
+              </div>
+            </div>
+
+            <div class="msg msg--blue">
+              <div class="msg__av"></div>
+              <div class="msg__col">
+                <div class="msg__name">파랑 <span class="msg__role">진행·종합</span></div>
+                <div class="msg__bubble msg__bubble--card">
+                  <div class="sum" style="border:0">
+                    <div class="sum__row"><div class="sum__k">방향</div><div class="sum__v">공격 (빈 곳 찌르기)</div></div>
+                    <div class="sum__row"><div class="sum__k">대상</div><div class="sum__v">인덱스</div></div>
+                    <div class="sum__row"><div class="sum__k">초점</div><div class="sum__v">오프라인 동작</div></div>
+                  </div>
+                </div>
+                <div class="msg__bubble">이렇게 이해했습니다. 다음 라운드에 넣습니다</div>
+                <div class="quick">
+                  <div class="chip is-on">맞음</div>
+                  <div class="chip">고치기</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="bottombar">
+          <div class="input">메시지</div>
+          <div class="btn btn--primary btn--sm">보내기</div>
+        </div>
+      </div>
+
+      <dl class="option__note">
+        <dt>의도</dt>
+        <dd>실제 개입은 "인덱스 파줘"가 아니라 저런 문장으로 온다. 말이 먼저고 구조는 파랑의 일이다.</dd>
+        <dt>대안</dt>
+        <dd>해석 카드는 개입 수단 표(방향/대상)와 같은 어휘를 쓴다 — 사용자가 구조를 배우는 부수 효과.</dd>
+        <dt>미정</dt>
+        <dd>무엇을 요구할 수 있는지가 화면에 없다 — README가 경고한 "자유 입력 하나로만"에 가깝다. 첫 개입 전 힌트가 필요할 수 있다.</dd>
+      </dl>
+    </div>
+
+    <!-- ══════════ 실험 B ══════════ -->
+    <div class="option">
+      <div class="option__head">
+        <div class="option__kind">실험 B</div>
+        <div class="option__name">파랑의 계획서 편집</div>
+        <div class="option__concept">파랑의 다음 라운드 제안이 편집 가능한 계획 카드로 온다. 승인하거나, 필드를 직접 고쳐 되돌려준다.</div>
+      </div>
+
+      <div class="frame frame--app">
+        <div class="frame__label">375 · 계획 카드</div>
+
+        <div class="topbar">
+          <div class="topbar__back">&lt;</div>
+          <div class="topbar__title">탈노션 메모 앱</div>
+          <div class="topbar__action">R3 완료</div>
+        </div>
+
+        <div class="body">
+          <div class="chat">
+
+            <div class="msg msg--blue">
+              <div class="msg__av"></div>
+              <div class="msg__col">
+                <div class="msg__name">파랑 <span class="msg__role">진행·종합</span></div>
+                <div class="msg__bubble">라운드 4 계획입니다. 고칠 데가 있으면 그 자리를 누르십시오</div>
+
+                <div class="msg__bubble msg__bubble--card">
+                  <div class="sum" style="border:0">
+                    <div class="sum__row"><div class="sum__k">목적</div><div class="sum__v">검증 <span class="small muted">누르면 변경</span></div></div>
+                    <div class="sum__row"><div class="sum__k">대상</div><div class="sum__v">인덱스 <span class="small muted">누르면 변경</span></div></div>
+                    <div class="sum__row"><div class="sum__k">이유</div><div class="sum__v">조명받아 오른 건 아닌지 확인</div></div>
+                    <div class="sum__row"><div class="sum__k">검색</div><div class="sum__v">하양 1회 — 로컬 우선 동기화 사례</div></div>
+                  </div>
+                </div>
+
+                <div class="quick">
+                  <div class="chip is-on">이대로</div>
+                  <div class="chip">종료</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="bottombar">
+          <div class="input">메시지</div>
+          <div class="btn btn--primary btn--sm">보내기</div>
+        </div>
+      </div>
+
+      <dl class="option__note">
+        <dt>의도</dt>
+        <dd>개입의 기준점이 "빈 종이"가 아니라 "파랑의 계획"이다. 계획을 고치는 것이 방향 지정·대상 지목을 겸한다.</dd>
+        <dt>대안</dt>
+        <dd>계획에 없는 것을 넣고 싶으면 자유 발언 — 파랑이 계획을 다시 써서 보낸다.</dd>
+        <dt>미정</dt>
+        <dd>파랑의 계획이 항상 먼저 오면 닻이 된다 — 사용자가 계획을 고치는 대신 승인만 누르는 관성. 스킬 검증에서 본 자기일관성 편향과 같은 계열의 위험.</dd>
+      </dl>
+    </div>
+
+  </div>
+</div>

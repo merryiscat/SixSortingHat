@@ -770,6 +770,17 @@ a { color: var(--c-0); }
 .thread__head { font-size: 11px; color: var(--c-2); margin-bottom: var(--s-2); }
 .thread__count { font-size: 11px; color: var(--c-2); border: 1px solid var(--c-4); padding: 0 var(--s-1); }
 
+/* 데스크톱 레이아웃 프레임 (2026-08-15) — 1024 이상 2컬럼, 미만은 세로 쌓기.
+   와이어 문서를 좁은 화면에서 봐도 안 깨지게 한다. */
+.desk { display: grid; min-height: 480px; }
+.desk__main { display: flex; flex-direction: column; min-width: 0; }
+.desk__side { display: flex; flex-direction: column; gap: var(--s-3); padding: var(--s-3); border-top: 1px solid var(--c-0); }
+@media (min-width: 1024px) {
+  .desk { grid-template-columns: minmax(0, 1fr) 300px; }
+  .desk__main { border-right: 1px solid var(--c-0); }
+  .desk__side { border-top: 0; }
+}
+
 /* 상단 고정 요약 — 스크롤해도 지금 상태가 안 사라진다 */
 .pin { border-bottom: 1px solid var(--c-0); background: var(--c-5); padding: var(--s-2) var(--s-3); font-size: 12px; }
 .pin__row { display: flex; align-items: center; gap: var(--s-2); }
