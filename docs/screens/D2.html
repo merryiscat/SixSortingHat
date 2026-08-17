@@ -1,0 +1,221 @@
+<meta charset="utf-8">
+<title>D2 개입 상세 (확정)</title>
+<link rel="stylesheet" href="wireframe.css">
+
+<div class="page">
+
+  <div class="meta">
+    <div class="meta__id">D2</div>
+    <div class="meta__title">개입 상세 — 말하면 파랑이 해석</div>
+    <div class="meta__purpose">자유 발언·칩 개입을 파랑이 해석해 방향·대상을 정하고, 다음 발화자를 고른다</div>
+    <div class="meta__grid">
+      <div class="meta__k">진입점</div>
+      <div class="meta__v">D1 멈춤(발언 경계) 후 내 차례 · D1 라운드 종료 카드</div>
+      <div class="meta__k">다음</div>
+      <div class="meta__v">D1 진행 재개 — 파랑이 고른 발화자부터</div>
+      <div class="meta__k">제약</div>
+      <div class="meta__v">화면 전환은 I1에서만 — D2는 별도 화면이 아니라 같은 방 안의 대화다. ID만 따로 가진다</div>
+      <div class="meta__k">규칙</div>
+      <div class="meta__v">개입은 매겨진 점수를 바꾸지 않는다. 「모자 지목」은 제거됨(2026-08-04) — 다음 발화자 선택은 파랑의 일이다</div>
+      <div class="meta__k">채택</div>
+      <div class="meta__v">D2-options 실험 A (2026-08-17 사용자 결정). 확인 게이트([맞음][고치기]) 없는 변형</div>
+      <div class="meta__k">상태</div>
+      <div class="meta__v">3종 — 라운드 중 개입 / 라운드 종료 개입 / 해석 정정</div>
+      <div class="meta__k">데이터</div>
+      <div class="meta__v">검증 실행(2026-08-02, 탈노션 메모 앱)</div>
+      <div class="meta__k">작성일</div>
+      <div class="meta__v">2026-08-17</div>
+    </div>
+  </div>
+
+  <div class="layout">
+    <div class="frames frames--multi">
+
+      <!-- ── 상태 1 · 라운드 중 개입 ── -->
+      <div class="frame frame--app">
+        <div class="frame__label">375 · 상태 1 라운드 중 개입 (해석 → 발화자 선택 → 재개)</div>
+
+        <div class="topbar">
+          <div class="topbar__back">&lt;</div>
+          <div class="topbar__title">탈노션 메모 앱</div>
+          <div class="topbar__action">R3 진행 중</div>
+        </div>
+
+        <div class="pin">
+          <div class="pin__row">
+            <span class="muted">남은 순서</span>
+            <span class="chip is-on">검정</span>
+            <span class="chip">초록</span>
+            <span class="chip">빨강</span>
+          </div>
+        </div>
+
+        <div class="body">
+          <div class="chat">
+
+            <div class="sysline sysline--strong">멈춤 · 내 차례</div>
+
+            <div class="msg msg--me">
+              <div class="msg__col">
+                <div class="msg__name">나</div>
+                <div class="msg__bubble">Git이 너무 쉽게 살아남는 것 같은데. 아무도 공격을 안 해</div>
+              </div>
+            </div>
+
+            <div class="msg msg--blue">
+              <div class="msg__av"></div>
+              <div class="msg__col">
+                <div class="msg__name">파랑 <span class="msg__role">진행·종합</span></div>
+                <div class="msg__bubble">공격으로 받습니다. 대상은 <b>Git</b> — 검정부터 듣습니다</div>
+              </div>
+            </div>
+
+            <div class="sysline">진행 재개</div>
+
+            <div class="typing">검정 입력 중</div>
+
+          </div>
+        </div>
+
+        <div class="bottombar">
+          <div class="btn btn--ghost btn--sm">멈춤</div>
+          <div class="input">끼어들기</div>
+        </div>
+      </div>
+
+      <!-- ── 상태 2 · 라운드 종료 개입 (칩은 지름길) ── -->
+      <div class="frame frame--app">
+        <div class="frame__label">375 · 상태 2 라운드 종료 개입 (칩 = 지름길)</div>
+
+        <div class="topbar">
+          <div class="topbar__back">&lt;</div>
+          <div class="topbar__title">탈노션 메모 앱</div>
+          <div class="topbar__action">R3 완료</div>
+        </div>
+
+        <div class="body">
+          <div class="chat">
+
+            <div class="msg msg--blue">
+              <div class="msg__av"></div>
+              <div class="msg__col">
+                <div class="msg__name">파랑 <span class="msg__role">진행·종합</span></div>
+                <div class="msg__bubble">다음은 검증을 제안합니다</div>
+                <div class="quick">
+                  <div class="chip">계속</div>
+                  <div class="chip is-on">더 파기</div>
+                  <div class="chip">새 아이디어</div>
+                  <div class="chip">정리</div>
+                  <div class="chip">종료</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="msg msg--me">
+              <div class="msg__col">
+                <div class="msg__name">나</div>
+                <div class="msg__bubble">더 파기</div>
+              </div>
+            </div>
+
+            <div class="msg msg--blue">
+              <div class="msg__av"></div>
+              <div class="msg__col">
+                <div class="msg__name">파랑</div>
+                <div class="msg__bubble">더 파기로 받습니다. 대상은 최고점 <b>인덱스</b> — 다른 대상이면 이름을 말하면 됩니다</div>
+                <div class="msg__bubble">라운드 4를 확장으로 엽니다. 하양부터 듣습니다</div>
+              </div>
+            </div>
+
+            <div class="sysline">라운드 4 · 확장</div>
+
+            <div class="typing">하양 검색 중</div>
+
+          </div>
+        </div>
+
+        <div class="bottombar">
+          <div class="btn btn--ghost btn--sm">멈춤</div>
+          <div class="input">끼어들기</div>
+        </div>
+      </div>
+
+      <!-- ── 상태 3 · 해석 정정 ── -->
+      <div class="frame frame--app">
+        <div class="frame__label">375 · 상태 3 해석 정정 (게이트 대신 재발언)</div>
+
+        <div class="topbar">
+          <div class="topbar__back">&lt;</div>
+          <div class="topbar__title">탈노션 메모 앱</div>
+          <div class="topbar__action">멈춤</div>
+        </div>
+
+        <div class="body">
+          <div class="chat">
+
+            <div class="msg msg--me">
+              <div class="msg__col">
+                <div class="msg__name">나</div>
+                <div class="msg__bubble">인덱스 오프라인일 때 어떻게 되는지 아무도 말 안 했잖아</div>
+              </div>
+            </div>
+
+            <div class="msg msg--blue">
+              <div class="msg__av"></div>
+              <div class="msg__col">
+                <div class="msg__name">파랑 <span class="msg__role">진행·종합</span></div>
+                <div class="msg__bubble">공격으로 받습니다. 대상은 <b>인덱스</b> · 초점은 오프라인 동작 — 검정부터 듣습니다</div>
+              </div>
+            </div>
+
+            <div class="msg msg--me">
+              <div class="msg__col">
+                <div class="msg__name">나</div>
+                <div class="msg__bubble">공격까진 아니고 사실이 궁금한 거야</div>
+              </div>
+            </div>
+
+            <div class="msg msg--blue">
+              <div class="msg__av"></div>
+              <div class="msg__col">
+                <div class="msg__name">파랑</div>
+                <div class="msg__bubble">고칩니다. 검증으로 받습니다 — 하양이 오프라인 동작을 확인합니다</div>
+              </div>
+            </div>
+
+            <div class="sysline">진행 재개</div>
+
+          </div>
+        </div>
+
+        <div class="bottombar">
+          <div class="btn btn--ghost btn--sm">멈춤</div>
+          <div class="input">끼어들기</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="notes">
+      <h3>의도</h3>
+      <ul>
+        <li><b>말이 먼저, 구조는 파랑의 일.</b> 실제 개입은 "인덱스 파줘"가 아니라 "오프라인일 때 어떻게 되는지 아무도 말 안 했잖아" 같은 문장으로 온다. 사용자에게 방향×대상 폼을 채우게 하지 않고, 해석을 파랑이 한다 (실험 A 채택, 2026-08-17 사용자 결정).</li>
+        <li><b>다음 발화자는 파랑이 고른다.</b> 사용자 개입은 내용을 주고, 순서는 지휘자가 정한다 — 「모자 지목」 제거(2026-08-04)와 일관. 순서를 정한 <i>이유</i>는 비공개(규약)지만, 누가 다음인지는 파랑이 말로 밝힌다.</li>
+        <li><b>해석은 반드시 입 밖에 낸다.</b> 방향·대상·다음 발화자를 파랑이 한 말풍선에 명시한다. 해석이 보이지 않으면 정정도 불가능하다 — 이것이 게이트 없는 흐름의 전제다.</li>
+        <li><b>확인 게이트 없음.</b> 원안의 [맞음][고치기] 칩을 뺐다. 매 개입마다 승인 탭은 마찰이고, 정지가 싸므로(발언 경계 정지, 2026-08-17) 해석이 어긋나면 다시 말하는 것으로 충분하다 (상태 3).</li>
+        <li><b>칩은 지름길이지 별도 경로가 아니다.</b> 라운드 종료 카드의 방향 칩(계속·더 파기·새 아이디어·정리·종료)은 유지한다 — "개입 수단을 자유 입력 하나로만 두지 않는다"는 규약 충족. 칩 탭은 그 단어를 보내는 것이고, 이후 해석·발화자 선택 경로는 자유 발언과 동일하다 (상태 2).</li>
+      </ul>
+
+      <h3>대안 (버려진 안 · 재검토 조건)</h3>
+      <ul>
+        <li><b>보편 A 이어지는 칩 · 보편 B 개입 시트</b> — 구조화 UI. <b>재검토 조건: 챗봇 실사용에서 파랑의 해석을 사용자가 정정하는 비율이 개입 10건 중 3건 이상이면</b> 확인 게이트(실험 A 원안) 또는 구조화 칩(보편 A)을 재검토한다.</li>
+        <li><b>실험 B 파랑의 계획서 편집</b> — 파랑의 계획이 항상 먼저 오면 닻이 된다(자기일관성 편향과 같은 계열). 위와 같은 조건에서 함께 재검토한다.</li>
+      </ul>
+
+      <h3>미정</h3>
+      <ul>
+        <li><b>첫 개입 전 힌트</b> — 무엇을 요구할 수 있는지가 화면에 없다. 첫 토론에서 파랑이 개입 방법을 한 번 안내할지는 온보딩 설계(챗봇 구현) 때 정한다.</li>
+      </ul>
+    </div>
+  </div>
+</div>

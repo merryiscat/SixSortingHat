@@ -19,7 +19,7 @@ SixSortingHat 챗봇의 흑백 와이어프레임 작업 규약. `screen-plan` �
 | Prefix | 영역 | 화면 |
 |---|---|---|
 | I | 입력 / 시작 | I1 주제 입력, I2 파랑의 확인 질문 |
-| D | 토론 (Discussion) | D1 라운드 진행, D2 라운드 종료 확인 |
+| D | 토론 (Discussion) | D1 라운드 진행, D2 개입 상세 |
 | R | 결과 (Result) | R1 최종 보고서 |
 | H | 기록 (History) | H1 토론 기록 |
 | S | 설정 (Settings) | S1 설정 |
